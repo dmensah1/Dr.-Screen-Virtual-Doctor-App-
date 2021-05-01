@@ -4,14 +4,16 @@ import Sidebar from "../components/Sidebar/Sidebar"
 import { useUser } from "../contexts/UserProvider";
 import Modal from '../components/Modal/Modal'
 import { Dialog } from "@headlessui/react";
-import { UserContextType } from "../interfaces/Interface";
+import { UserContextType, Appointment, FollowUp, Prescription } from "../interfaces/Interface";
 import axios from 'axios';
 import { getPatientAppt } from '../services/appointmentService'
+import PatientContainer from '../components/PatientContainer/PatientContainer'
 
 const Home = () => {
   const { userDetails}: UserContextType = useUser();
-  const [appointments, setAppointments] = React.useState();
-  
+  const [appointments, setAppointments] = React.useState<Appointment[]>([]);
+  const [followUps, setFollowUps] = React.useState<FollowUp[]>([]);
+  const [prescription, setPrescription] = React.useState<Prescription[]>([]);
   
   // fetch appointments on load
   React.useEffect(() => {
@@ -35,12 +37,14 @@ const Home = () => {
         <div className="flex flex-col md:flex-row p-8 justify-around">
           {userDetails.isDoctor ? (
             <>
-              <ColumnContainer />
+              {/* <ColumnContainer /> */}
+              {/* <DoctorContainer /> */}
             </>
           ) : (
             <>
-              <ColumnContainer />
-              <ColumnContainer />
+              <PatientContainer appointments={appointments} followUps={followUps} prescriptions={prescription}/>
+              {/* <ColumnContainer />
+              <ColumnContainer /> */}
             </>
           )}
         </div>

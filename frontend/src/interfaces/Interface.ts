@@ -42,3 +42,37 @@ export interface Doctor {
   clinicAddress: string;
   patientIds: String[]
 }
+
+export interface Patient {
+  id: string;
+  email: string;
+  fullName: string;
+  birthday: string;
+  isDoctor: boolean;
+  doctorId: string;
+}
+
+export interface Appointment {
+  date: string;
+  doctorId: string;
+  followUpId: string;
+  id: string;
+  patientId: string;
+}
+
+export interface FollowUp {
+  id: string;
+  doctorId: string;
+  patientId: string;
+  note: string;
+  attachmentUrls: string[];
+}
+
+export interface Prescription {
+  doctorId: string;
+  patientId: string;
+  drugName: string;
+  message: string;
+  prescribedDate: string;
+  duration: string;
+}

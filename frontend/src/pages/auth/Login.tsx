@@ -39,8 +39,6 @@ const Login = () => {
       .catch((error) => error.message);
 
     console.log(userID);
-
-    if (token) {
       const user: User = await getUser(userID);
       console.log(user)
 
@@ -55,9 +53,8 @@ const Login = () => {
       });
 
       history.push("/");
-    }
-  };
-
+  }
+  
   return (
     <section className="flex flex-col md:flex-row h-screen items-center">
       <div className="bg-indigo-600 hidden lg:block w-full md:w-1/2 xl:w-2/3 h-screen">

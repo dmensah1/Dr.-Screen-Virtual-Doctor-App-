@@ -5,7 +5,6 @@ const router = express.Router();
 const admin = require('firebase-admin');
 const db = admin.firestore();
 
-const patientsRef = 
 
 // Create a new doctor
 // /api/doctors/
@@ -68,6 +67,35 @@ router.put('/addPatient', (req, res) => {
 // api/doctors/getPatients/:id
 router.get('/getPatients/:id', async (req, res) => {
     let patientIds = [];
+    let doctorId = req.params.id;
+
+    const patientsRef = db.collection('patients');
+    const snapshot = await patientsRef.where('doctorId', '==', doctorId).get();
+
+    
+    
+    // (doc => {
+    //     const patients = [];
+
+    //     doc.forEach(item => {
+    //         console.log(item);
+    //         patients.push({
+    //             id: item.id,
+    //             email: item.data().email,
+    //             fullName: item.data().fullName,
+    //             birthday: item.data().birthday,
+    //             isDoctor: item.data().isDoctor,
+    //             doctorId: item.data().doctorId
+    //         })
+    //     });
+
+
+    //     //console.log(patients);
+    // });
+
+    // snapshot.forEach(doc => {
+    //     console.log(doc.id, '=>', doc.data());
+    // })
 
     // db.collection('patients').where('doctorId', '==', req.params.id).get().then(result => {
     //     result.forEach(item => {

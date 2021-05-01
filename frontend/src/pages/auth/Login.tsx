@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import axios from "axios";
 import { BACKEND_URL, FIREBASE_SIGN_IN } from "../../config/config";
@@ -6,11 +6,9 @@ import { User, UserContextType } from "../../interfaces/Interface";
 import { useUser } from "../../contexts/UserProvider";
 
 const Login = () => {
-  const [authenticating, setAuthenticating] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
-  const { userDetails, setUserDetails }: UserContextType = useUser();
+  const { setUserDetails }: UserContextType = useUser();
 
   const history = useHistory();
 

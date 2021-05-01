@@ -29,12 +29,12 @@ router.post('/', (req, res) => {
 });
 
 // Get a user by id
-// /api/users/id
+// /api/patients/id
 router.get('/:id' , (req, res) => {
     return db.collection('patients').doc(req.params.id).get()
         .then(user => {
             res.status(200).json({
-                user: user.data()
+                patient: user.data()
             });
         })
         .catch(err => {
@@ -43,7 +43,7 @@ router.get('/:id' , (req, res) => {
         });
 });
 
-// GET ALL PROFILES
+// GET ALL Patients
 router.get('/', (req, res) => {
 	db.collection('patients').get().then(snapshot =>{
         let profiles = [];
@@ -65,6 +65,22 @@ router.get('/', (req, res) => {
 			fetchedProfiles: profiles,
 		});
 	});
+});
+
+
+// Delete a patient
+// /api/patients/:id
+router.delete('/:id', (req, res) => {
+    return db.collection('patients').doc(req.params.id).delete()
+        .then(user => {
+            res.status(200).json({
+                message: 'Patient Deleted.'
+            });
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(404).send("User not found");
+        });
 });
 
 

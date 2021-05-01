@@ -164,4 +164,3 @@ router.get('/getForDay/:id', async (req, res) => {
 
 
 module.exports = router;
-

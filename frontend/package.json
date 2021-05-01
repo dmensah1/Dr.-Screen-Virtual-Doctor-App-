@@ -23,6 +23,7 @@
     "react-dom": "^17.0.2",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
+    "react-select": "^4.3.0",
     "tailwindcss": "2.x",
     "typescript": "4.x"
   },
@@ -53,6 +54,7 @@
   },
   "devDependencies": {
     "@types/react-calendar": "^3.1.4",
-    "@types/react-router-dom": "^5.1.7"
+    "@types/react-router-dom": "^5.1.7",
+    "@types/react-select": "^4.0.15"
   }
 }

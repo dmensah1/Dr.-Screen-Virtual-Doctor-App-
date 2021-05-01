@@ -2,10 +2,7 @@ import * as React from 'react'
 import ColumnContainer from "../components/ColumnContainer/ColumnContainer";
 import Sidebar from "../components/Sidebar/Sidebar"
 import { useUser } from "../contexts/UserProvider";
-import Modal from '../components/Modal/Modal'
-import { Dialog } from "@headlessui/react";
 import { UserContextType, Appointment, FollowUp, Prescription } from "../interfaces/Interface";
-import axios from 'axios';
 import { getPatientAppt } from '../services/appointmentService'
 import PatientContainer from '../components/PatientContainer/PatientContainer'
 

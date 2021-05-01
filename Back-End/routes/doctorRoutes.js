@@ -18,7 +18,7 @@ router.post('/', (req, res) => {
         patientIds: []
     }
 
-    return db.collection('doctors').doc(doctorData.id).set(doctorData)
+    return db.collection('doctors').add(doctorData)
     .then(() => {
         console.log('New Doctor Created')
         res.status(200).json({
@@ -30,17 +30,23 @@ router.post('/', (req, res) => {
 
 // Get a doctor by id
 // /api/doctors/id
-router.get('/:id' , (req, res) => {
-    db.collection('doctors').doc(req.params.id).get()
-        .then(user => {
-            res.status(200).json({
-                doctor: user.data()
-            });
-        })
-        .catch(err => {
-            console.log(err);
-            res.status(404).send("User not found");
+router.get('/:id' , async (req, res) => {
+    let uid = req.params.id;
+
+    const doctorsRef = db.collection('doctors');
+    const snapshot = await doctorsRef.where('id', '==', uid).get();
+
+    if (snapshot.empty) {
+        console.log('No matching documents.');
+        return;
+    }  
+      
+    snapshot.forEach(doc => {
+    console.log(doc.id, '=>', doc.data());
+        res.status(200).json({
+            doctor: doc.data()
         });
+    });
 });
 
 // Add a patientId to the doctor
@@ -66,7 +72,6 @@ router.put('/addPatient', (req, res) => {
 // Get all patients for a doctor
 // api/doctors/getPatients/:id
 router.get('/getPatients/:id', async (req, res) => {
-    let patientIds = [];
     let doctorId = req.params.id;
 
     const patientsRef = db.collection('patients');
@@ -81,8 +86,9 @@ router.get('/getPatients/:id', async (req, res) => {
       snapshot.forEach(doc => {
         console.log(doc.id, '=>', doc.data());
 
+        // note the id im using here
             patients.push({
-                id: doc.id,
+                id: doc.data().id,
                 email: doc.data().email,
                 fullName: doc.data().fullName,
                 birthday: doc.data().birthday,

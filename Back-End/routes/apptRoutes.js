@@ -8,7 +8,6 @@ const db = admin.firestore();
 // creates an appt
 // api/appointments/
 router.post('/', (req, res) => {
-
     db.collection('appointments').add({
         date:  req.body.date,
         doctorId: req.body.doctorId,
@@ -66,6 +65,33 @@ router.get('/forDoctor/:id', (req, res) => {
             fetchedAppointments: doctorsAppts
         })
     });    
+})
+
+
+// get all appts for a specific patient
+// api/appointments/forPatient/:id
+router.get('/forPatient/:id', (req, res) => {
+    db.collection('appointments').get().then(snapshot => {
+        let patientsAppts = [];
+
+        snapshot.forEach(doc => {
+            console.log(doc.id, '=>', doc.data());
+            if (doc.data().patientId == req.params.id) {
+                patientsAppts.push(
+                    {
+                        id: doc.id,
+                        date: doc.data().date,
+                        doctorId: doc.data().doctorId,
+                        patientId: doc.data().patientId,
+                        followUpId: doc.data().followUpId
+                    }
+                )
+            }
+        });
+        res.status(200).json({
+            fetchedAppointments: patientsAppts
+        })
+    }); 
 })
 
 

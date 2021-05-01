@@ -18,7 +18,7 @@ router.post('/', (req, res) => {
         doctorId: req.body.doctorId
     }
 
-    return db.collection('patients').doc(patientData.id).set(patientData)
+    return db.collection('patients').add(patientData)
     .then(() => {
         console.log('New Patient Created')
         res.status(200).json({

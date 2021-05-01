@@ -23,12 +23,14 @@ const patientRoutes = require('./routes/patientRoutes')
 const doctorRoutes = require('./routes/doctorRoutes')
 const apptRoutes = require('./routes/apptRoutes')
 const followupRoutes = require('./routes/followupRoutes')
+const prescriptionRoutes = require('./routes/prescriptionRoutes')
 
 
 app.use('/api/patients', patientRoutes);
 app.use('/api/doctors', doctorRoutes)
 app.use('/api/appointments', apptRoutes)
 app.use('/api/followups', followupRoutes)
+app.use('/api/prescriptions', prescriptionRoutes)
 
 //exporting the module
 module.exports = app;

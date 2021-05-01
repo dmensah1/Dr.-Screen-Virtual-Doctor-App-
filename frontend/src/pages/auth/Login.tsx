@@ -55,6 +55,7 @@ const Login = () => {
 
       history.push("/");
   }
+}
   
   return (
     <section className="flex flex-col md:flex-row h-screen items-center">
@@ -138,7 +139,6 @@ const Login = () => {
       </div>
     </section>
   );
-  }
 };
 
 export default Login;

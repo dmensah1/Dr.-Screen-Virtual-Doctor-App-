@@ -99,7 +99,6 @@ router.get('/getPatients/:id', async (req, res) => {
         res.status(200).json({
             doctorPatients: patients
         });
-
 });
 
 module.exports = router;

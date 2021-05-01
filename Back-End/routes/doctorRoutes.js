@@ -29,10 +29,10 @@ router.post('/', (req, res) => {
     .catch((err) => console.log(err))
 });
 
-// Get a user by id
+// Get a doctor by id
 // /api/doctors/id
 router.get('/:id' , (req, res) => {
-    return db.collection('doctors').doc(req.params.id).get()
+    db.collection('doctors').doc(req.params.id).get()
         .then(user => {
             res.status(200).json({
                 doctor: user.data()
@@ -46,7 +46,6 @@ router.get('/:id' , (req, res) => {
 
 // Add a patientId to the doctor
 // api/doctors/addPatient
-
 router.put('/addPatient', (req, res) => {
     let doctorId = req.body.doctorId;
     let patientToAdd = req.body.patientId;
@@ -62,6 +61,43 @@ router.put('/addPatient', (req, res) => {
 		res.status(500).send(`Error adding patient ${patientToAdd} to doctor ${doctorId}`);
 	});
 
+});
+
+
+// Get all patients for a doctor
+// api/doctors/getPatients/:id
+router.get('/getPatients/:id', async (req, res) => {
+    let patientIds = [];
+
+    await db.collection('doctors').doc(req.params.id).get().then(doctor => {
+		if (!doctor.exists){
+			res.status(404).send("Doctor not found");
+		}
+		else {
+			patientIds = doctor.data().patientIds;
+            console.log(patientIds);
+			
+			if (patientIds.length == 0){
+				console.log('Doctor has no patients');
+				res.status(200).json([]);
+			}
+		}
+	}).catch(error => {
+		res.status(404).send("Doctor not found");
+	});
+
+    let patients = [];
+    for (let i = 0; i < patientIds.length; i++) {
+		let patient = await db.collection('patients').doc(patientIds[i]).get();
+		if (patient.exists){
+			patients.push(patient.data());
+		}
+	}
+
+	res.status(200).json({
+        message: 'Fetched',
+        patientsArr: patients
+    });
 });
 
 module.exports = router;

@@ -31,7 +31,8 @@ router.post('/', (req, res) => {
 // Get a user by id
 // /api/patients/id
 router.get('/:id' , (req, res) => {
-    return db.collection('patients').doc(req.params.id).get()
+    let uid = req.params.id;
+    return db.collection('patients').doc(uid).get()
         .then(user => {
             res.status(200).json({
                 patient: user.data()

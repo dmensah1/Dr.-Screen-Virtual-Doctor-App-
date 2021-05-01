@@ -16,7 +16,7 @@ router.post('/', (req, res) => {
         patientId: req.body.patientId,
         followUpId: null,
         symptoms: req.body.symptoms,
-        results: req.body.results,
+        results: [],
         note: req.body.note
     }).then(doc => {
 		console.log('Added an appt document with ID: ' + doc.id);

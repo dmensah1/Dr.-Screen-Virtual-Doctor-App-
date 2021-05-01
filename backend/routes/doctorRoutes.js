@@ -96,6 +96,7 @@ router.get('/getPatients/:id', async (req, res) => {
         });
 
         res.status(200).json(patients);
+
 });
 
 module.exports = router;

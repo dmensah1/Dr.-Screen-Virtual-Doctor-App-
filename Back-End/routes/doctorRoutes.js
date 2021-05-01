@@ -5,7 +5,7 @@ const router = express.Router();
 const admin = require('firebase-admin');
 const db = admin.firestore();
 
-
+const patientsRef = 
 
 // Create a new doctor
 // /api/doctors/
@@ -69,35 +69,19 @@ router.put('/addPatient', (req, res) => {
 router.get('/getPatients/:id', async (req, res) => {
     let patientIds = [];
 
-    await db.collection('doctors').doc(req.params.id).get().then(doctor => {
-		if (!doctor.exists){
-			res.status(404).send("Doctor not found");
-		}
-		else {
-			patientIds = doctor.data().patientIds;
-            console.log(patientIds);
-			
-			if (patientIds.length == 0){
-				console.log('Doctor has no patients');
-				res.status(200).json([]);
-			}
-		}
-	}).catch(error => {
-		res.status(404).send("Doctor not found");
-	});
+    // db.collection('patients').where('doctorId', '==', req.params.id).get().then(result => {
+    //     result.forEach(item => {
+            
+    //     })
+        
+    // }).catch(err => {
+    //     console.log(err);
+    // })
 
-    let patients = [];
-    for (let i = 0; i < patientIds.length; i++) {
-		let patient = await db.collection('patients').doc(patientIds[i]).get();
-		if (patient.exists){
-			patients.push(patient.data());
-		}
-	}
 
-	res.status(200).json({
-        message: 'Fetched',
-        patientsArr: patients
-    });
+
+
+
 });
 
 module.exports = router;

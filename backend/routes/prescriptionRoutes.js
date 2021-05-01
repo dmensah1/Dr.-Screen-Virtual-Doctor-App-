@@ -41,7 +41,35 @@ router.delete('/:id', (req, res) => {
     });
 });
 
-// Get a patients prescriptions
+// Get all prescriptions for a patient
+// api/prescriptions/forPatient/:id
+router.get('/forPatient/:id', (req, res) => {
+    let patientId = req.params.id;
+
+    db.collection('prescriptions').get().then(snapshot => {
+        let patientsPrescriptions = [];
+
+        snapshot.forEach(doc => {
+            console.log(doc.id, '=>', doc.data());
+
+            if (doc.data().patientId == patientId) {
+                patientsPrescriptions.push({
+                    id: doc.id,
+                    doctorId: doc.data().doctorId,
+                    patientId: doc.data().patientId,
+                    drugName: doc.data().drugName,
+                    message: doc.data().message,
+                    prescribedDate: doc.data().prescribedDate,
+                    duration: doc.data().duration
+                })
+            }
+        })
+
+        res.status(200).json(patientsPrescriptions)
+    })
+
+})
+
 
 
 module.exports = router;

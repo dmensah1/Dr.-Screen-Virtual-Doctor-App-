@@ -63,9 +63,7 @@ router.get('/forDoctor/:id', (req, res) => {
                 )
             }
         });
-        res.status(200).json({
-            fetchedAppointments: doctorsAppts
-        })
+        res.status(200).json(doctorsAppts)
     });    
 })
 
@@ -91,9 +89,7 @@ router.get('/forPatient/:id', (req, res) => {
                 )
             }
         });
-        res.status(200).json({
-            fetchedAppointments: patientsAppts
-        })
+        res.status(200).json(patientsAppts)
     }); 
 });
 

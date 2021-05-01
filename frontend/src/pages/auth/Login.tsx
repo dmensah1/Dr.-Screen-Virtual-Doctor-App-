@@ -40,6 +40,7 @@ const Login = () => {
 
     if (token) {
       const user: User = await getUser(userID);
+      console.log(user)
 
       // set local storage
       setUserDetails({

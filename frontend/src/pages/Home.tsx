@@ -1,10 +1,35 @@
 import ColumnContainer from "../components/ColumnContainer/ColumnContainer";
+import Sidebar from "../components/Sidebar/Sidebar"
+import { useUser } from "../contexts/UserProvider";
 
 const Home = () => {
+  const { userDetails } = useUser();
+
   return (
-    <main className="bg-gray-100 dark:bg-gray-800 rounded-2xl relative h-screen overflow-hidden relative">
-      <div className="flex items-start justify-between">
-        <div className="h-screen hidden lg:block my-4 ml-4 shadow-lg relative w-80">
+    <main className="flex">
+      <Sidebar />
+
+      <div className="bg-gray-100 w-10/12">
+        <div className="flex flex-col md:flex-row p-8 justify-around">
+          <ColumnContainer />
+          <ColumnContainer />
+          <ColumnContainer />
+        </div>
+        {/* <div className="flex flex-col w-full md:p-4 md:space-y-4">
+          
+        </div> */}
+      </div>
+      {/* <div className="bg-green-200">Hello {userDetails.fullName}</div>
+      <div className="flex flex-col w-full md:p-4 md:space-y-4 bg-red-200">
+        <div className="flex flex-col md:flex-row p-8 bg-green-200">
+          <ColumnContainer />
+          <ColumnContainer />
+          <ColumnContainer />
+        </div>
+      </div> */}
+
+      {/* <div className="flex items-start justify-between"> */}
+      {/* <div className="h-screen hidden lg:block my-4 ml-4 shadow-lg relative w-80">
           <div className="bg-white h-full rounded-2xl dark:bg-gray-700">
             <div className="flex items-center justify-center pt-6">
               <svg
@@ -165,15 +190,19 @@ const Home = () => {
               </div>
             </nav>
           </div>
-        </div>
-        <div className="flex flex-col w-full pl-0 md:p-4 md:space-y-4">
-          <div className="flex flex-col md:flex-row p-8">
-            <ColumnContainer />
-            <ColumnContainer />
-            <ColumnContainer />
+        </div> */}
+      {/* <div className="flex flex-col">
+          <div className="bg-green-200">Hello {userDetails.fullName}</div>
+
+          <div className="flex flex-col w-full md:p-4 md:space-y-4 bg-red-200">
+            <div className="flex flex-col md:flex-row p-8 bg-green-200">
+              <ColumnContainer />
+              <ColumnContainer />
+              <ColumnContainer />
+            </div>
           </div>
         </div>
-      </div>
+      </div> */}
     </main>
   );
 };

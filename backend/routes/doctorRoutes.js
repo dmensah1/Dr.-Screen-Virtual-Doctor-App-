@@ -43,9 +43,8 @@ router.get('/:id' , async (req, res) => {
       
     snapshot.forEach(doc => {
     console.log(doc.id, '=>', doc.data());
-        res.status(200).json({
-            doctor: doc.data()
-        });
+    
+        res.status(200).json(doc.data());
     });
 });
 
@@ -96,10 +95,7 @@ router.get('/getPatients/:id', async (req, res) => {
             })
         });
 
-        res.status(200).json({
-            doctorPatients: patients
-        });
-
+        res.status(200).json(patients);
 });
 
 module.exports = router;

@@ -43,9 +43,7 @@ router.get('/:id' , async (req, res) => {
       
     snapshot.forEach(doc => {
     console.log(doc.id, '=>', doc.data());
-        res.status(200).json({
-            patient: doc.data()
-        });
+        res.status(200).json(doc.data());
     });
 });
 
@@ -67,9 +65,7 @@ router.get('/', (req, res) => {
             )
         });
         
-		res.status(200).json({
-			fetchedProfiles: profiles,
-		});
+		res.status(200).json(profiles);
 	});
 });
 

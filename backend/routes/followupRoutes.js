@@ -36,9 +36,7 @@ router.get('/:id', async (req, res) => {
         console.log('No such document!');
     } else {
         console.log('Document data:', doc.data());
-        res.status(200).json({
-            followUp: doc.data()
-        });
+        res.status(200).json(doc.data());
     }
 });
 
@@ -63,9 +61,7 @@ router.get('/forDoctor/:id', (req, res) => {
             }
         });
 
-        res.status(200).json({
-            fetchedFollowups: doctorsFollowups
-        })
+        res.status(200).json(doctorsFollowups)
     })
 });
 
@@ -90,9 +86,7 @@ router.get('/forPatient/:id', (req, res) => {
             }
         });
 
-        res.status(200).json({
-            fetchedFollowups: patientsFollowups
-        })
+        res.status(200).json(patientsFollowups)
     })
 });
 

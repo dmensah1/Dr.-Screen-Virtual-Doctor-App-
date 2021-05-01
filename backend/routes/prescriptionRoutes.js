@@ -41,7 +41,14 @@ router.delete('/:id', (req, res) => {
     });
 });
 
-// Get a patients prescriptions
+// Get all prescriptions for a patient
+// api/prescriptions/forPatient/:id
+router.get('/forPatient/:id', (req, res) => {
+    let patientId = req.params.id;
+
+    
+})
+
 
 
 module.exports = router;

@@ -13,7 +13,7 @@ router.post('/', (req, res) => {
         doctorId: req.body.doctorId,
         doctorName: req.body.doctorName,
         patientId: req.body.patientId,
-        followUpId: null  // a follow up needs to be created before an appt
+        followUpId: null
     }).then(doc => {
 		console.log('Added an appt document with ID: ' + doc.id);
 		res.status(200).json({

@@ -65,7 +65,6 @@ router.put('/addPatient', (req, res) => {
 		console.log(`Error adding patient ${patientToAdd} to doctor ${doctorId}`);
 		res.status(500).send(`Error adding patient ${patientToAdd} to doctor ${doctorId}`);
 	});
-
 });
 
 

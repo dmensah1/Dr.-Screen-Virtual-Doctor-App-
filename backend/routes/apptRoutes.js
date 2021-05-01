@@ -11,6 +11,7 @@ router.post('/', (req, res) => {
 
     db.collection('appointments').add({
         date:  req.body.date,
+        time: req.body.time,
         doctorId: req.body.doctorId,
         doctorName: req.body.doctorName,
         patientId: req.body.patientId,
@@ -59,6 +60,7 @@ router.get('/forDoctor/:id', (req, res) => {
                     {
                         id: doc.id,
                         date: doc.data().date,
+                        time: doc.data().time,
                         doctorId: doc.data().doctorId,
                         doctorName: doc.data().doctorName,
                         patientId: doc.data().patientId,
@@ -88,6 +90,7 @@ router.get('/forPatient/:id', (req, res) => {
                     {
                         id: doc.id,
                         date: doc.data().date,
+                        time: doc.data().time,
                         doctorId: doc.data().doctorId,
                         doctorName: doc.data().doctorName,
                         patientId: doc.data().patientId,
@@ -144,16 +147,20 @@ router.get('/getForDay/:id', async (req, res) => {
 
         // this if statement might need altering
         if (doc.data().date == dateToReturn) {
+            // daysAppointments.push({
+            //     id: doc.id,
+            //     date: doc.data().date,
+            //     time: doc.data().time,
+            //     doctorId: doc.data().doctorId,
+            //     doctorName: doc.data().doctorName,
+            //     patientId: doc.data().patientId,
+            //     followUpId: doc.data().followUpId,
+            //     symptoms: doc.data().symptoms,
+            //     results: doc.data().results,
+            //     note: doc.data().note
+            // })
             daysAppointments.push({
-                id: doc.id,
-                date: doc.data().date,
-                doctorId: doc.data().doctorId,
-                doctorName: doc.data().doctorName,
-                patientId: doc.data().patientId,
-                followUpId: doc.data().followUpId,
-                symptoms: doc.data().symptoms,
-                results: doc.data().results,
-                note: doc.data().note
+                time: doc.data().time
             })
         }
     });

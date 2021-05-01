@@ -11,6 +11,7 @@ router.post('/', (req, res) => {
     db.collection('appointments').add({
         date:  req.body.date,
         doctorId: req.body.doctorId,
+        doctorName: req.body.doctorName,
         patientId: req.body.patientId,
         followUpId: null  // a follow up needs to be created before an appt
     }).then(doc => {
@@ -55,6 +56,7 @@ router.get('/forDoctor/:id', (req, res) => {
                         id: doc.id,
                         date: doc.data().date,
                         doctorId: doc.data().doctorId,
+                        doctorName: doc.data().doctorName,
                         patientId: doc.data().patientId,
                         followUpId: doc.data().followUpId
                     }
@@ -82,6 +84,7 @@ router.get('/forPatient/:id', (req, res) => {
                         id: doc.id,
                         date: doc.data().date,
                         doctorId: doc.data().doctorId,
+                        doctorName: doc.data().doctorName,
                         patientId: doc.data().patientId,
                         followUpId: doc.data().followUpId
                     }
@@ -92,7 +95,28 @@ router.get('/forPatient/:id', (req, res) => {
             fetchedAppointments: patientsAppts
         })
     }); 
-})
+});
+
+
+// add a followUpId to an existing appointment
+// api/appointments/followUp/:id
+router.put('/followUp/:id', (req, res) => {
+    let apptId = req.params.id;
+    let followUpId = req.body.followUpId;
+
+    const apptRef = db.collection('appointments').doc(apptId);
+    apptRef.update({
+        followUpId: followUpId
+    })
+    .then(() => {
+        console.log('Added follow-up Id');
+		res.status(200).send('Added follow-up Id');
+    })
+    .catch(err => {
+        console.log('Error adding follow-up Id');
+		res.status(500).send('Error adding follow-up Id');
+    })
+});
 
 
 module.exports = router;

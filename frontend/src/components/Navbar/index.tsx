@@ -11,8 +11,8 @@ const index = () => {
                 <svg
                   fill="none"
                   className="relative w-5 h-5"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                   stroke-width="2"
                   stroke="currentColor"
                   viewBox="0 0 24 24"

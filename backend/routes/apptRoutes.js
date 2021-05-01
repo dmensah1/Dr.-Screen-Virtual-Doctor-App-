@@ -8,12 +8,16 @@ const db = admin.firestore();
 // creates an appt
 // api/appointments/
 router.post('/', (req, res) => {
+
     db.collection('appointments').add({
         date:  req.body.date,
         doctorId: req.body.doctorId,
         doctorName: req.body.doctorName,
         patientId: req.body.patientId,
-        followUpId: null
+        followUpId: null,
+        symptoms: req.body.symptoms,
+        results: req.body.results,
+        note: req.body.note
     }).then(doc => {
 		console.log('Added an appt document with ID: ' + doc.id);
 		res.status(200).json({
@@ -58,7 +62,10 @@ router.get('/forDoctor/:id', (req, res) => {
                         doctorId: doc.data().doctorId,
                         doctorName: doc.data().doctorName,
                         patientId: doc.data().patientId,
-                        followUpId: doc.data().followUpId
+                        followUpId: doc.data().followUpId,
+                        symptoms: doc.data().symptoms,
+                        results: doc.data().results,
+                        note: doc.data().note
                     }
                 )
             }
@@ -84,7 +91,10 @@ router.get('/forPatient/:id', (req, res) => {
                         doctorId: doc.data().doctorId,
                         doctorName: doc.data().doctorName,
                         patientId: doc.data().patientId,
-                        followUpId: doc.data().followUpId
+                        followUpId: doc.data().followUpId,
+                        symptoms: doc.data().symptoms,
+                        results: doc.data().results,
+                        note: doc.data().note
                     }
                 )
             }
@@ -113,6 +123,44 @@ router.put('/followUp/:id', (req, res) => {
 		res.status(500).send('Error adding follow-up Id');
     })
 });
+
+// get appts for a certain date for certain doctor
+// api/appointments/getForDay/:id
+router.get('/getForDay/:id', async (req, res) => {
+    let doctorId = req.params.id;
+    let dateToReturn = req.body.date;
+
+    const appointmentsRef = db.collection('appointments');
+    const snapshot = await appointmentsRef.where('doctorId', '==', doctorId).get();
+
+    if (snapshot.empty) {
+        console.log('No matching documents.');
+        return;
+    }
+    
+    const daysAppointments = [];
+    snapshot.forEach(doc => {
+        console.log(doc.id, '=>', doc.data());
+
+        // this if statement might need altering
+        if (doc.data().date == dateToReturn) {
+            daysAppointments.push({
+                id: doc.id,
+                date: doc.data().date,
+                doctorId: doc.data().doctorId,
+                doctorName: doc.data().doctorName,
+                patientId: doc.data().patientId,
+                followUpId: doc.data().followUpId,
+                symptoms: doc.data().symptoms,
+                results: doc.data().results,
+                note: doc.data().note
+            })
+        }
+    });
+
+    res.status(200).json(daysAppointments);
+});
+
 
 
 module.exports = router;

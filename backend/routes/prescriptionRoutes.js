@@ -14,7 +14,8 @@ router.post('/', (req, res) => {
         drugName: req.body.drugName,
         message: req.body.message,
         prescribedDate: req.body.prescribedDate,
-        duration: req.body.duration
+        duration: req.body.duration,
+        renewalRequest: false
     }).then(doc => {
 		console.log('Added a prescription document with ID: ' + doc.id);
 		res.status(200).json({
@@ -60,16 +61,54 @@ router.get('/forPatient/:id', (req, res) => {
                     drugName: doc.data().drugName,
                     message: doc.data().message,
                     prescribedDate: doc.data().prescribedDate,
-                    duration: doc.data().duration
+                    duration: doc.data().duration,
+                    renewalRequest: doc.data().renewalRequest
                 })
             }
         })
 
         res.status(200).json(patientsPrescriptions)
     })
+});
 
-})
+// Update renewal request field on patient renewal request
+// api/prescriptions/renewalReq/:id
+router.put('/renewalReq/:id', (req, res) => {
+    let prescriptionId = req.params.id;
 
+    const prescriptionRef = db.collection('prescriptions').doc(prescriptionId);
+    prescriptionRef.update({
+        renewalRequest: true
+    })
+    .then(() => {
+        console.log('Updated renewal request.');
+		res.status(200).send('Renewal Request Made.');
+    })
+    .catch(err => {
+        console.log('Error updating renewal request.');
+		res.status(500).send('Error updating renewal request.');
+    })
+});
+
+
+// Reset renewal request field upon doctor viewal
+// api/prescriptions/renewalReset/:id
+router.put('/renewalReset/:id', (req, res) => {
+    let prescriptionId = req.params.id;
+
+    const prescriptionRef = db.collection('prescriptions').doc(prescriptionId);
+    prescriptionRef.update({
+        renewalRequest: false
+    })
+    .then(() => {
+        console.log('Reset renewal request.');
+		res.status(200).send('Renewal Reset Made.');
+    })
+    .catch(err => {
+        console.log('Error resetting renewal request.');
+		res.status(500).send('Error resetting renewal request.');
+    })
+});
 
 
 module.exports = router;

@@ -31,10 +31,13 @@ admin.initializeApp({
 const db = admin.firestore();
 
 const patientRoutes = require('./routes/patientRoutes')
+const doctorRoutes = require('./routes/doctorRoutes')
+const apptRoutes = require('./routes/apptRoutes')
 
 
 app.use('/api/patients', patientRoutes);
-
+app.use('/api/doctors', doctorRoutes)
+app.use('/api/appointments', apptRoutes)
 
 //exporting the module
 module.exports = app;

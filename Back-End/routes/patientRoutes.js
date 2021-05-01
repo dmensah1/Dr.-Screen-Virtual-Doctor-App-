@@ -13,7 +13,7 @@ router.post('/', (req, res) => {
         id: req.body.id,
         email: req.body.email,
         fullName: req.body.fullName,
-        birthday: req.body.bday,
+        birthday: req.body.birthday,
         isDoctor: req.body.isDoctor,
         doctorId: req.body.doctorId
     }
@@ -21,17 +21,21 @@ router.post('/', (req, res) => {
     return db.collection('patients').doc(patientData.id).set(patientData)
     .then(() => {
         console.log('New Patient Created')
+        res.status(200).json({
+            message: 'Created Successfully.'
+        })
     })
     .catch((err) => console.log(err))
 });
 
 // Get a user by id
-// /api/users/id
+// /api/patients/id
 router.get('/:id' , (req, res) => {
-    return db.collection('patients').doc(req.params.id).get()
+    let uid = req.params.id;
+    return db.collection('patients').doc(uid).get()
         .then(user => {
             res.status(200).json({
-                user: user.data()
+                patient: user.data()
             });
         })
         .catch(err => {
@@ -40,9 +44,8 @@ router.get('/:id' , (req, res) => {
         });
 });
 
-// GET ALL PROFILES
+// GET ALL Patients
 router.get('/', (req, res) => {
-    console.log('req recvd')
 	db.collection('patients').get().then(snapshot =>{
         let profiles = [];
 		snapshot.forEach((doc) => {
@@ -63,6 +66,22 @@ router.get('/', (req, res) => {
 			fetchedProfiles: profiles,
 		});
 	});
+});
+
+
+// Delete a patient
+// /api/patients/:id
+router.delete('/:id', (req, res) => {
+    return db.collection('patients').doc(req.params.id).delete()
+        .then(user => {
+            res.status(200).json({
+                message: 'Patient Deleted.'
+            });
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(404).send("User not found");
+        });
 });
 
 

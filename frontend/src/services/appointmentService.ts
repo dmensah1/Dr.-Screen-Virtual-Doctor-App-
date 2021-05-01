@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { BACKEND_URL } from '../config/config';
-import { AppointmentRequest } from '../interfaces/Interface';
+import { Appointment, AppointmentRequest } from '../interfaces/Interface';
 
 const APPT_URL = `${BACKEND_URL}/appointments`
 const PATIENT_URL = `${APPT_URL}/forPatient`;
@@ -18,7 +18,18 @@ export const deleteAppt = async (apptId: string) => {
   return await axios.delete(`${APPT_URL}/${apptId}`);
 };
 
-// returns AppointmentResponse
 export const createAppt = async (details: AppointmentRequest) => {
   return await axios.post(`${APPT_URL}`, details);
+};
+
+export const addFollowUp = async (apptId: string) => {
+  return await axios.put(`${APPT_URL}/followUp/${apptId}`);
+};
+
+export const getApptDay: (doctorId: string, date: Date | Date[]) => Promise<Appointment[]> = async (doctorId: string, date: Date | Date[]) => {
+  const req = {
+    date: date
+  }
+  const res: any = await axios.get(`${APPT_URL}/getForDay/${doctorId}`, {data: req});
+  return res;
 };

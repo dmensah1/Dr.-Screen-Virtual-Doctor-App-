@@ -116,4 +116,3 @@ router.put('/followUp/:id', (req, res) => {
 
 
 module.exports = router;
-

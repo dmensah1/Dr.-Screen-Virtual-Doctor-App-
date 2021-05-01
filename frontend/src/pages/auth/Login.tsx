@@ -1,19 +1,25 @@
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import axios from "axios";
-import { BACKEND_URL, FIREBASE_AUTH_URL } from "../../config/config";
-import { User } from "../../interfaces/Interface";
+import { BACKEND_URL, FIREBASE_SIGN_IN } from "../../config/config";
+import { User, UserContextType } from "../../interfaces/Interface";
+import { useUser } from "../../contexts/UserProvider";
 
 const Login = () => {
   const [authenticating, setAuthenticating] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const { userDetails, setUserDetails }: UserContextType = useUser();
 
   const history = useHistory();
 
+  const getUser: any = async (userId: string) => {
+    return await axios.get(`${BACKEND_URL}/patients/${userId}`);
+  };
+
   const signInWithEmailAndPassword = async () => {
-    const url = FIREBASE_AUTH_URL;
+    const url = FIREBASE_SIGN_IN;
 
     const req = {
       email: email,
@@ -21,25 +27,34 @@ const Login = () => {
       returnSecureToken: true,
     };
 
-    const res: any = await axios.post(url, req);
+    let token = "";
+    let userID = "";
+    const res: any = await axios
+      .post(url, req)
+      .then((result) => {
+        console.log(result);
+        token = result.data.idToken;
+        userID = result.data.localId;
+      })
+      .catch((error) => error.message);
 
-    console.log(res);
-
-    const token = res.token;
+    console.log(userID);
 
     if (token) {
-      const userID = res.localId;
-
-      const user: Partial<User> = getUser(userID);
+      const user: User = getUser(userID);
 
       // set local storage
+      setUserDetails({
+        id: user.id,
+        email: user.email,
+        fullName: user.fullName,
+        birthday: user.birthday,
+        isDoctor: user.isDoctor,
+        doctorId: user.doctorId,
+      });
 
       history.push("/");
     }
-  };
-
-  const getUser: any = async (userId: string) => {
-    return await axios.get(`${BACKEND_URL}/${userId}`);
   };
 
   return (

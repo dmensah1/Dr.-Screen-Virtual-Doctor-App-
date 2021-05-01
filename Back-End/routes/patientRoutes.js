@@ -30,18 +30,23 @@ router.post('/', (req, res) => {
 
 // Get a user by id
 // /api/patients/id
-router.get('/:id' , (req, res) => {
+router.get('/:id' , async (req, res) => {
     let uid = req.params.id;
-    return db.collection('patients').doc(uid).get()
-        .then(user => {
-            res.status(200).json({
-                patient: user.data()
-            });
-        })
-        .catch(err => {
-            console.log(err);
-            res.status(404).send("User not found");
+
+    const patientsRef = db.collection('patients');
+    const snapshot = await patientsRef.where('id', '==', uid).get();
+
+    if (snapshot.empty) {
+        console.log('No matching documents.');
+        return;
+      }  
+      
+    snapshot.forEach(doc => {
+    console.log(doc.id, '=>', doc.data());
+        res.status(200).json({
+            patient: doc.data()
         });
+    });
 });
 
 // GET ALL Patients

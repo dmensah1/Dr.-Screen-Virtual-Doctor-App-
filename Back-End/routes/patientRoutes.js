@@ -13,7 +13,7 @@ router.post('/', (req, res) => {
         id: req.body.id,
         email: req.body.email,
         fullName: req.body.fullName,
-        birthday: req.body.bday,
+        birthday: req.body.birthday,
         isDoctor: req.body.isDoctor,
         doctorId: req.body.doctorId
     }
@@ -21,6 +21,9 @@ router.post('/', (req, res) => {
     return db.collection('patients').doc(patientData.id).set(patientData)
     .then(() => {
         console.log('New Patient Created')
+        res.status(200).json({
+            message: 'Created Successfully.'
+        })
     })
     .catch((err) => console.log(err))
 });
@@ -42,7 +45,6 @@ router.get('/:id' , (req, res) => {
 
 // GET ALL PROFILES
 router.get('/', (req, res) => {
-    console.log('req recvd')
 	db.collection('patients').get().then(snapshot =>{
         let profiles = [];
 		snapshot.forEach((doc) => {

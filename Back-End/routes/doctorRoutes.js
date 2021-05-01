@@ -72,43 +72,28 @@ router.get('/getPatients/:id', async (req, res) => {
     const patientsRef = db.collection('patients');
     const snapshot = await patientsRef.where('doctorId', '==', doctorId).get();
 
-    
-    
-    // (doc => {
-    //     const patients = [];
+    if (snapshot.empty) {
+        console.log('No matching documents.');
+        return;
+      }  
 
-    //     doc.forEach(item => {
-    //         console.log(item);
-    //         patients.push({
-    //             id: item.id,
-    //             email: item.data().email,
-    //             fullName: item.data().fullName,
-    //             birthday: item.data().birthday,
-    //             isDoctor: item.data().isDoctor,
-    //             doctorId: item.data().doctorId
-    //         })
-    //     });
+      const patients = [];
+      snapshot.forEach(doc => {
+        console.log(doc.id, '=>', doc.data());
 
+            patients.push({
+                id: doc.id,
+                email: doc.data().email,
+                fullName: doc.data().fullName,
+                birthday: doc.data().birthday,
+                isDoctor: doc.data().isDoctor,
+                doctorId: doc.data().doctorId
+            })
+        });
 
-    //     //console.log(patients);
-    // });
-
-    // snapshot.forEach(doc => {
-    //     console.log(doc.id, '=>', doc.data());
-    // })
-
-    // db.collection('patients').where('doctorId', '==', req.params.id).get().then(result => {
-    //     result.forEach(item => {
-            
-    //     })
-        
-    // }).catch(err => {
-    //     console.log(err);
-    // })
-
-
-
-
+        res.status(200).json({
+            doctorPatients: patients
+        });
 
 });
 

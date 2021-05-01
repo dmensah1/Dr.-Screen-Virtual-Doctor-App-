@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import axios from "axios";
-import { BACKEND_URL, FIREBASE_SIGN_IN } from "../../config/config";
+import { FIREBASE_SIGN_IN } from "../../config/config";
 import { User, UserContextType } from "../../interfaces/Interface";
 import { useUser } from "../../contexts/UserProvider";
 

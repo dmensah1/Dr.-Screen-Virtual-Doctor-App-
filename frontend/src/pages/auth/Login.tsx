@@ -43,6 +43,7 @@ const Login = () => {
     if (token) {
       const res: any = await getUser(userID);
       const user: User = res.data.patient
+      console.log(user)
 
       // set local storage
       setUserDetails({

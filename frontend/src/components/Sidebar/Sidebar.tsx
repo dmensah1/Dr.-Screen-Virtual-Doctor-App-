@@ -63,7 +63,7 @@ const Sidebar = () => {
 
               <a
                 className="flex items-center mt-5 py-2 px-8 text-gray-600 border-r-4 border-white hover:bg-gray-200 hover:text-gray-700 hover:border-gray-700"
-                href="#"
+                href="/"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -117,7 +117,7 @@ const Sidebar = () => {
             <div className="absolute bottom-0 my-10">
               <a
                 className="flex items-center py-2 px-8 text-gray-500 hover:text-gray-600"
-                href="#"
+                href="/"
               >
                 <svg
                   className="h-5 w-5"

@@ -22,11 +22,13 @@ const db = admin.firestore();
 const patientRoutes = require('./routes/patientRoutes')
 const doctorRoutes = require('./routes/doctorRoutes')
 const apptRoutes = require('./routes/apptRoutes')
+const followupRoutes = require('./routes/followupRoutes')
 
 
 app.use('/api/patients', patientRoutes);
 app.use('/api/doctors', doctorRoutes)
 app.use('/api/appointments', apptRoutes)
+app.use('/api/followups', followupRoutes)
 
 //exporting the module
 module.exports = app;

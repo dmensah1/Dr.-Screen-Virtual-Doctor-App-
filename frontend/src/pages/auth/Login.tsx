@@ -51,6 +51,7 @@ const Login = () => {
         birthday: user.birthday,
         isDoctor: user.isDoctor,
         doctorId: user.doctorId,
+        doctorName: user.doctorName
       });
 
       history.push("/");

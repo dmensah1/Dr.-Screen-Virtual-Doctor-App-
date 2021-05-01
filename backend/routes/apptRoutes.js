@@ -159,9 +159,9 @@ router.get('/getForDay/:id', async (req, res) => {
             //     results: doc.data().results,
             //     note: doc.data().note
             // })
-            daysAppointments.push({
-                time: doc.data().time
-            })
+            daysAppointments.push(
+                doc.data().time
+            )
         }
     });
 

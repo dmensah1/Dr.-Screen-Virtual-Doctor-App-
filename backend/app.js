@@ -10,6 +10,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // CORS
 app.use(cors());
 
+app.use(express.static('ml'))
+
 // initializing the firebase firestore db
 const admin = require('firebase-admin');
 const serviceAccount = require('./ruhacks-bedfordlions-firebase-adminsdk-b9pyb-aa260d5cdb.json');

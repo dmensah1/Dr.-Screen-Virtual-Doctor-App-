@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
-import * as tf from '@tensorflow/tfjs';
+// import * as tf from '@tensorflow/tfjs';
+const tf = require('@tensorflow/tfjs-node');
 
 // Firebase
 const admin = require('firebase-admin');
@@ -8,7 +9,7 @@ const db = admin.firestore();
 
 // creates an appt
 // api/appointments/
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
 
     db.collection('appointments').add({
         date:  req.body.date,
@@ -30,10 +31,12 @@ router.post('/', (req, res) => {
 		res.status(500);
     });
 
-    const model = await tf.loadLayersModel('ml/model.json');
+    const model = await tf.loadLayersModel('http://localhost:4000/model.json');
+   
     //TODO: convert symptoms to bool
-    const example = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-    const prediction = model.predict(example);
+    const example = [[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]]
+    const prediction = model.predict(tf.tensor(example));
+    console.log(await prediction.array());
     //TODO: convert prediction
 
 
@@ -156,21 +159,7 @@ router.get('/getForDay/:id', async (req, res) => {
 
         // this if statement might need altering
         if (doc.data().date == dateToReturn) {
-            // daysAppointments.push({
-            //     id: doc.id,
-            //     date: doc.data().date,
-            //     time: doc.data().time,
-            //     doctorId: doc.data().doctorId,
-            //     doctorName: doc.data().doctorName,
-            //     patientId: doc.data().patientId,
-            //     followUpId: doc.data().followUpId,
-            //     symptoms: doc.data().symptoms,
-            //     results: doc.data().results,
-            //     note: doc.data().note
-            // })
-            daysAppointments.push({
-                time: doc.data().time
-            })
+            daysAppointments.push(doc.data().time)
         }
     });
 

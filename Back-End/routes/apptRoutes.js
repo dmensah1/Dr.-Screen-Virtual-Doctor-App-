@@ -14,9 +14,9 @@ router.post('/', (req, res) => {
         patientId: req.body.patientId,
         followUpId: null  // a follow up needs to be created before an appt
     }).then(doc => {
-		console.log('Added a class document with ID: ' + doc.id);
+		console.log('Added an appt document with ID: ' + doc.id);
 		res.status(200).json({
-            apptID: doc.id
+            apptId: doc.id
         });
 	}).catch(error => {
 		console.log(error);

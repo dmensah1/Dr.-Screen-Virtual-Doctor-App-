@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+import * as tf from '@tensorflow/tfjs';
 
 // Firebase
 const admin = require('firebase-admin');
@@ -27,7 +28,15 @@ router.post('/', (req, res) => {
 	}).catch(error => {
 		console.log(error);
 		res.status(500);
-	});
+    });
+
+    const model = await tf.loadLayersModel('ml/model.json');
+    //TODO: convert symptoms to bool
+    const example = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+    const prediction = model.predict(example);
+    //TODO: convert prediction
+
+
 });
 
 
@@ -73,7 +82,7 @@ router.get('/forDoctor/:id', (req, res) => {
             }
         });
         res.status(200).json(doctorsAppts)
-    });    
+    });
 })
 
 
@@ -103,7 +112,7 @@ router.get('/forPatient/:id', (req, res) => {
             }
         });
         res.status(200).json(patientsAppts)
-    }); 
+    });
 });
 
 
@@ -140,7 +149,7 @@ router.get('/getForDay/:id', async (req, res) => {
         console.log('No matching documents.');
         return;
     }
-    
+
     const daysAppointments = [];
     snapshot.forEach(doc => {
         console.log(doc.id, '=>', doc.data());

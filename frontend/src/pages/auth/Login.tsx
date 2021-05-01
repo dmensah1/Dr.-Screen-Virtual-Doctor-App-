@@ -5,6 +5,8 @@ import { BACKEND_URL, FIREBASE_SIGN_IN } from "../../config/config";
 import { User, UserContextType } from "../../interfaces/Interface";
 import { useUser } from "../../contexts/UserProvider";
 
+const BACKEND_URL2 =  'http://localhost:4000/api';
+
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -13,7 +15,7 @@ const Login = () => {
   const history = useHistory();
 
   const getUser: any = async (userId: string) => {
-    return await axios.get(`${BACKEND_URL}/patients/${userId}`);
+    return await axios.get(BACKEND_URL2 + `/patients/${userId}`);
   };
 
   const signInWithEmailAndPassword = async () => {

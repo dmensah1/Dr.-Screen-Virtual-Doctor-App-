@@ -27,7 +27,7 @@ const Login = () => {
 
     let token = "";
     let userID = "";
-    const res: any = await axios
+    await axios
       .post(url, req)
       .then((result) => {
         console.log(result);
@@ -39,7 +39,7 @@ const Login = () => {
     console.log(userID);
 
     if (token) {
-      const user: User = getUser(userID);
+      const user: User = await getUser(userID);
 
       // set local storage
       setUserDetails({

@@ -40,7 +40,7 @@ const Login = () => {
 
     if (token) {
       const res: any = await getUser(userID);
-      const user: User = res.data.patient
+      const user: User = res.data
       console.log(user)
 
       // set local storage
@@ -54,9 +54,9 @@ const Login = () => {
       });
 
       history.push("/");
+    }
   }
-}
-  
+
   return (
     <section className="flex flex-col md:flex-row h-screen items-center">
       <div className="bg-indigo-600 hidden lg:block w-full md:w-1/2 xl:w-2/3 h-screen">

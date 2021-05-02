@@ -11,8 +11,8 @@ const db = admin.firestore();
 // api/appointments/
 router.post('/', async (req, res) => {
     const model = await tf.loadLayersModel('http://localhost:4000/model.json');
-    // const boolSymptomsArr = req.body.symptoms;
-    const boolSymptomsArr = [1,0,1,0,0,0,0,0,1,0,0,0,1,0,1,0,0,1,0,0];
+    const boolSymptomsArr = req.body.symptoms;
+    // const boolSymptomsArr = [1,0,1,0,0,0,0,0,1,0,0,0,1,0,1,0,0,1,0,0];
 
     db.collection('appointments').add({
         date:  req.body.date,
@@ -43,7 +43,6 @@ router.post('/', async (req, res) => {
         })
         sortedArray = sortedArray.slice(Math.max(sortedArray.length - 5, 0))
         
-        // in order of lowest to highest confidence
         let indexArray = []
         for (let i = 0; i < sortedArray.length; i++) {
             for (let j = 0; j < unsortedPredictions.length; j++) {
@@ -54,6 +53,8 @@ router.post('/', async (req, res) => {
                 }
             }
         }
+
+        indexArray.reverse();
         console.log(indexArray)
         
 		res.status(200).json({apptId: doc.id, indexArray});

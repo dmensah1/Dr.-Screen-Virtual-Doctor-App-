@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { BACKEND_URL } from '../config/config';
 import { Appointment, AppointmentRequest } from '../interfaces/Interface';
+import { AppointmentModel } from '@devexpress/dx-react-scheduler'
 
 const APPT_URL = `${BACKEND_URL}/appointments`
 const PATIENT_URL = `${APPT_URL}/forPatient`;
@@ -11,8 +12,8 @@ export const getPatientAppt: (userId: string) => Promise<Appointment[]> = async 
   return res.data;
 };
 
-export const getDoctorAppt: (userId: string) => Promise<Appointment[]> = async (userId: string) => {
-  const res: any = await axios.get(`${DOCTOR_URL}/${userId}`);
+export const getDoctorAppt: (userId: string) => Promise<AppointmentModel[]> = async (userId: string) => {
+  const res = await axios.get(`${DOCTOR_URL}/${userId}`);
   return res.data;
 };
 

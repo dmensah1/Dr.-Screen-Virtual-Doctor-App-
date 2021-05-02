@@ -67,6 +67,8 @@ export interface Appointment {
   results: string[];
   note: string;
   time: Date;
+  startTime: string;
+  endTime: string;
 }
 
 export interface FollowUp {

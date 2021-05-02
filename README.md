@@ -1,5 +1,7 @@
 # RU Hacks 2021 - Bedford Lions
 
+This project was built for RU Hacks 2021. See more information [here](https://devpost.com/software/dr-screen)
+
 ## Who We Are
 
 We are a group of university students from Dalhousie University, Western University and University of Toronto. 

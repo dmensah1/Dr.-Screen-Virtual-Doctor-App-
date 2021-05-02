@@ -77,6 +77,7 @@ export interface FollowUp {
   patientId: string;
   note: string;
   attachmentUrls: string[];
+  patientName?: string;
 }
 
 export interface Prescription {

@@ -15,7 +15,8 @@ We are a group of university students from Dalhousie University, Western Univers
 1. [Local Deployment](#local_deployment)
 
 
-<a name="local_deployment"></>
+<a name="local_deployment">
+  
 ## Steps for Local Deployment
 - `git clone https://github.com/dmensah1/ruhacks-bedfordlions.git`
 - In terminal 1

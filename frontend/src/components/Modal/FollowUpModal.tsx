@@ -1,3 +1,4 @@
+import axios from 'axios';
 import * as React from 'react';
 import { FollowUp } from '../../interfaces/Interface';
 
@@ -5,8 +6,61 @@ type FollowUpModalProps = {
   followUp: FollowUp
 };
 
+const URL = 'https://us-central1-ruhacks-bedfordlions.cloudfunctions.net/storeImage';
+
 export default function FollowUpModal({ followUp }: FollowUpModalProps) {
   const [showModal, setShowModal] = React.useState(false);
+  const [file, setFile] = React.useState<File | null>(null)
+  const imageRef = React.useRef<HTMLInputElement | null>(null)
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault()
+    const image = e.target.files
+    if (image) {
+      setFile(image[0])
+    }
+  }
+
+  const handleSubmit = async (e: any) => {
+    e.preventDefault()
+    const base: string = await toBase64(file)
+    const clean = base.replace('data:image/jpeg;base64,', '')
+    const blob = base64toBlob(clean, '')
+    console.log(blob)
+
+    const res = await axios.post(URL, blob)
+    console.log(res)
+
+  }
+
+  const toBase64: (image: any) => Promise<string> = (image: any) => new Promise((resolve) => {
+    const reader = new FileReader();
+    reader.onload = (e: any) => {
+      resolve(e.target.result)
+    }
+    reader.readAsDataURL(image)
+  })
+
+  function base64toBlob(base64Data: any, contentType: any) {
+    contentType = contentType || '';
+    const sliceSize = 1024;
+    const byteCharacters = atob(base64Data);
+    const bytesLength = byteCharacters.length;
+    const slicesCount = Math.ceil(bytesLength / sliceSize);
+    const byteArrays = new Array(slicesCount);
+
+    for (var sliceIndex = 0; sliceIndex < slicesCount; ++sliceIndex) {
+      const begin = sliceIndex * sliceSize;
+      const end = Math.min(begin + sliceSize, bytesLength);
+
+      const bytes = new Array(end - begin);
+      for (let offset = begin, i = 0; offset < end; ++i, ++offset) {
+        bytes[i] = byteCharacters[offset].charCodeAt(0);
+      }
+      byteArrays[sliceIndex] = new Uint8Array(bytes);
+    }
+    return new Blob(byteArrays, { type: contentType });
+  }
 
   return (
     <>
@@ -45,11 +99,19 @@ export default function FollowUpModal({ followUp }: FollowUpModalProps) {
                     <p>
                       Note
                     </p>
+                    <p>
+                      Add Images
+                    </p>
                   </div>
                   <div className="w-9/12 p-1 text-blueGray-500 text-lg leading-relaxed">
                     <p>
                       {followUp.note}
                     </p>
+                    <form onSubmit={handleSubmit}>
+                      <input type='file' accept='image/*' onChange={handleChange} />
+                      <button type='submit'>Upload</button>
+                    </form>
+
                   </div>
                 </div>
                 {/*footer*/}

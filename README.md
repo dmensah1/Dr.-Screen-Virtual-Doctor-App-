@@ -14,4 +14,5 @@ The COVID-19 pandemic has vastly changed the way we approached our day-to-day ta
 
 Dr. Screen was built as a supplementary tool to streamline family practitioners' jobs. Its goal is to reduce the amount of time that a practitioner would need to spend with patients for less serious inquiries such as diagnosis of patient conditions as well as prescription renewals. By streamlining simpler inquiries that require visits to the doctor, a doctor is able to help a greater number of patients throughout a day.
 
-## Steps for Local Development
+## Steps for Local Deployment
+

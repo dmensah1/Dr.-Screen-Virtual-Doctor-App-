@@ -48,14 +48,14 @@ const ColumnContainer = ({
           <p className="font-bold text-md p-4 text-black dark:text-white">
             Follow Ups
           <span className="text-sm text-gray-500 dark:text-gray-300 dark:text-white ml-2">
-              ({followUps.length})
+              ({followUps ? followUps.length : '0'})
           </span>
           </p>
         </div>
         <ul>
-          {followUps.map((item, index) => {
+          {followUps && followUps.map((item, index) => {
             return (
-              <li className="flex items-center text-gray-600 dark:text-gray-200 justify-center py-3 border-b-2 border-gray-100 dark:border-gray-800 hover:bg-gray-100 cursor-pointer">
+              <li key={index} className="flex items-center text-gray-600 dark:text-gray-200 justify-center py-3 border-b-2 border-gray-100 dark:border-gray-800 hover:bg-gray-100 cursor-pointer">
                 <FollowUpModal followUp={item} />
               </li>
             );

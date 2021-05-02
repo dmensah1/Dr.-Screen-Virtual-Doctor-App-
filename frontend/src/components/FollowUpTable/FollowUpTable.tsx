@@ -1,3 +1,5 @@
+import { FollowUp } from "../../interfaces/Interface";
+
 const people = [
   {
     name: "Jane Cooper",
@@ -55,7 +57,11 @@ const people = [
   },
 ];
 
-export default function FollowUpTable() {
+type FollowUpTableProps = {
+  followUps: FollowUp[]
+}
+
+export default function FollowUpTable({followUps}: FollowUpTableProps) {
   return (
     <div className="flex flex-col">
       <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">

@@ -56,6 +56,10 @@ export default function AppointmentModal({ appointment }: AppointmentModalProps)
                 </div>
                 {/*body*/}
                 <div className="relative p-6 flex flex-row min-w-full">
+                  {/* <ul className="list-disc">
+                    Test
+                    <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit</li>
+                  </ul> */}
                   <div className="w-3/12 text-blueGray-500 text-lg leading-relaxed text-right font-bold p-1">
                     <p>
                       Date

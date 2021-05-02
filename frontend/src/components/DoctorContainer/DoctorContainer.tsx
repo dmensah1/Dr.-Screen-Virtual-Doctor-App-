@@ -8,39 +8,16 @@ import {
 } from "@devexpress/dx-react-scheduler-material-ui";
 import FollowUpTable from "../FollowUpTable/FollowUpTable";
 import { getDoctorAppt } from "../../services/appointmentService";
-import { UserContextType } from "../../interfaces/Interface";
+import { Appointment, UserContextType } from "../../interfaces/Interface";
 import { useUser } from "../../contexts/UserProvider";
-import Moment from 'moment';
 
 const currentDate = '2021-05-02';
-
-// const appointments: AppointmentModel[] = [
-//   {
-//     title: "Check up appointment with Demir",
-//     startDate: "2021-05-02T10:00",
-//     endDate: "2021-05-02T11:00",
-//   },
-//   {
-//     title: "Check up appointment with Liam",
-//     startDate: "2021-05-02T14:30",
-//     endDate: "2021-05-02T15:30",
-//   },
-//   {
-//     title: "Check up appointment with Jonny",
-//     startDate: "2021-05-02T11:30",
-//     endDate: "2021-05-02T12:00",
-//   },
-//   {
-//     title: "Check up appointment with Robie",
-//     startDate: "2021-05-02T16:30",
-//     endDate: "2021-05-02T17:00",
-//   },
-// ];
 
 const DoctorContainer = () => {
   const [overviewTab, setOverviewTab] = React.useState(true);
   const [followUpTab, setFollowUpTab] = React.useState(false);
   const [appointments, setAppointments] = React.useState<AppointmentModel[]>([]);
+  const [appointmentDetails, setAppointmentDetails] = React.useState<Partial<Appointment[]>>([]);
 
   const { userDetails, setUserDetails }: UserContextType = useUser();
 
@@ -60,6 +37,12 @@ const DoctorContainer = () => {
           title: `Checkup with ${item.patientId}`,
           id: item.id
         })
+
+        // let details = {
+        //   id: item.id,
+        //   date: item.date,
+        //   symptoms: item.symptoms,
+        //   results,
       }
     }
 
@@ -69,7 +52,8 @@ const DoctorContainer = () => {
   React.useEffect(() => {
     arrayOfAppointmentData();
     console.log(appointments)
-  }, [])
+  }, []);
+  
 
   return (
     <div className="flex flex-col justify-center font-sans">

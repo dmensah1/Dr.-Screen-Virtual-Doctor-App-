@@ -21,7 +21,7 @@ export const getDoctorFollowUps: (doctorId: string) => Promise<FollowUp> = async
 
 export const getPatientFollowUps: (patientId: string) => Promise<FollowUp[]> = async (patientId: string) => {
   const res: any = await axios.get(`${URL}/forPatient/${patientId}`);
-  return res.data;
+  return res.data.data;
 };
 
 export const deleteFollowUp = async (followUpId: string) => {

@@ -6,6 +6,7 @@ import { UserContextType, Appointment, FollowUp, Prescription } from "../interfa
 import { getPatientAppt } from '../services/appointmentService'
 import PatientContainer from '../components/PatientContainer/PatientContainer'
 import { getUserPrescription } from '../services/prescriptionService';
+import { getPatientFollowUps } from '../services/followUpService';
 
 const Home = () => {
   const { userDetails }: UserContextType = useUser();
@@ -30,6 +31,12 @@ const Home = () => {
       console.log(prescription)
     };
 
+    const getFollowUps = async () => {
+      const res = await getPatientFollowUps(userDetails.id);
+      setFollowUps(res)
+    }
+
+    getFollowUps();
     getAppointments();
     getPrescriptions()
   }, []);

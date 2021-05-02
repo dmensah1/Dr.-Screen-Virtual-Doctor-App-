@@ -43,8 +43,26 @@ router.post('/', async (req, res) => {
 
         indexArray.reverse();
 
+        let startTime = req.body.date.slice(0, 10);
+        let endTime = req.body.date.slice(0, 10);
+
+
+        let timeArray = req.body.time;
+
+        let sTime = timeArray.split('-')[0];
+        
+        let eTime = timeArray.split('-')[1];
+
+        console.log(sTime)
+        console.log(eTime)
+
+        startTime += `T${sTime}`;
+        endTime += `T${eTime}`;
+
     db.collection('appointments').add({
         date:  req.body.date,
+        startTime: startTime,
+        endTime: endTime,
         time: req.body.time,
         doctorId: req.body.doctorId,
         doctorName: req.body.doctorName,
@@ -91,6 +109,8 @@ router.get('/forDoctor/:id', (req, res) => {
                     {
                         id: doc.id,
                         date: doc.data().date,
+                        startTime: doc.data().startTime,
+                        endTime: doc.data().endTime,
                         time: doc.data().time,
                         doctorId: doc.data().doctorId,
                         doctorName: doc.data().doctorName,
@@ -128,7 +148,9 @@ router.get('/forPatient/:id', (req, res) => {
                         followUpId: doc.data().followUpId,
                         symptoms: doc.data().symptoms,
                         results: doc.data().results,
-                        note: doc.data().note
+                        note: doc.data().note,
+                        startTime: doc.data().startTime,
+                        endTime: doc.data().endTime,
                     }
                 )
             }

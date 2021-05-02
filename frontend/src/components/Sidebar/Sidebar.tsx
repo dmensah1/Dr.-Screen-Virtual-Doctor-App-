@@ -5,7 +5,7 @@ const Sidebar = () => {
 
   return (
     <>
-      <div className="bg-gray-200 h-full">
+      <div>
         <div className="flex flex-col sm:flex-row sm:justify-around">
           <div className="w-64 h-screen bg-white">
             <div className="flex items-center justify-center mt-10">

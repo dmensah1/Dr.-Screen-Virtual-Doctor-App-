@@ -31,6 +31,12 @@ const Form = () => {
       arrayOfSymptomValues[symptom.index] = 1; 
     });
 
+    const alteredDate: string | undefined = date?.toString().slice(0, 10);
+    if (alteredDate) {
+      console.log(alteredDate)
+    }
+
+
     const apptDetails: AppointmentRequest = {
       date: date,
       doctorId: userDetails.doctorId,
@@ -38,7 +44,7 @@ const Form = () => {
       symptoms: arrayOfSymptomValues,
       doctorName: userDetails.doctorName,
       note: note,
-      time: time
+      time: time,
     };
 
     console.log(apptDetails);
@@ -61,8 +67,13 @@ const Form = () => {
       if (date) {
         const appointments = await getApptDay(userDetails.doctorId, date);
         console.log(appointments)
+
+        if (appointments.length) {
+          setTakenTimes(appointments);
+        } else {
+          setTakenTimes([]);
+        }
         
-        setTakenTimes(appointments);
         await filterAvailTimes();
       }
     };
@@ -75,6 +86,8 @@ const Form = () => {
     setTimeout(async () => {
     if (takenTimes?.length > 0) {
       const res = AVAIL_TIMES.filter((item) => !takenTimes.includes(item));
+
+      
 
       setAvailTimes(res);
       setDaySchedule(true);

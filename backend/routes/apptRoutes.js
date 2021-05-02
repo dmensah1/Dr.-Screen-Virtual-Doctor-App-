@@ -12,21 +12,8 @@ const db = admin.firestore();
 router.post('/', async (req, res) => {
     const model = await tf.loadLayersModel('http://localhost:4000/model.json');
     const boolSymptomsArr = req.body.symptoms;
-    // const boolSymptomsArr = [1,0,1,0,0,0,0,0,1,0,0,0,1,0,1,0,0,1,0,0];
 
-    db.collection('appointments').add({
-        date:  req.body.date,
-        time: req.body.time,
-        doctorId: req.body.doctorId,
-        doctorName: req.body.doctorName,
-        patientId: req.body.patientId,
-        followUpId: null,
-        symptoms: req.body.symptoms,
-        results: [],
-        note: req.body.note
-    }).then(async doc => {
-		console.log('Added an appt document with ID: ' + doc.id);
-        const example = [boolSymptomsArr]
+    const example = [boolSymptomsArr]
         const prediction = model.predict(tf.tensor(example));
 
         //converting predictions
@@ -55,8 +42,18 @@ router.post('/', async (req, res) => {
         }
 
         indexArray.reverse();
-        console.log(indexArray)
-        
+
+    db.collection('appointments').add({
+        date:  req.body.date,
+        time: req.body.time,
+        doctorId: req.body.doctorId,
+        doctorName: req.body.doctorName,
+        patientId: req.body.patientId,
+        followUpId: null,
+        symptoms: req.body.symptoms,
+        results: indexArray,
+        note: req.body.note
+    }).then(async doc => {
 		res.status(200).json({apptId: doc.id, indexArray});
 	}).catch(error => {
 		console.log(error);

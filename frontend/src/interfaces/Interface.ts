@@ -29,9 +29,9 @@ export interface AppointmentRequest {
   doctorId: string;
   doctorName: string;
   patientId: string;
-  symptoms: string[];
+  symptoms: number[];
   note: string;
-  time: Date | Date[] | undefined;
+  time: string | undefined;
 }
 
 export interface AppointmentResponse {

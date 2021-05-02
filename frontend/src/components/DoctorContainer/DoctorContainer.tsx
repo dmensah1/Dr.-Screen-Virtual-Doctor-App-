@@ -9,7 +9,7 @@ import {
 } from "@devexpress/dx-react-scheduler-material-ui";
 import FollowUpTable from "../FollowUpTable/FollowUpTable";
 import { getDoctorAppt } from "../../services/appointmentService";
-import { getDoctorFollowUps} from "../../services/followUpService";
+import { getDoctorFollowUps } from "../../services/followUpService";
 import { Appointment, UserContextType, FollowUp } from "../../interfaces/Interface";
 import { useUser } from "../../contexts/UserProvider";
 import DoctorAppointmentModal from "../Modal/DoctorAppointmentModal";
@@ -104,13 +104,13 @@ const DoctorContainer = () => {
     let copyId = { ...id };
 
     // console.log(copyId)
-    const appt:Appointment = findAppointmentById(copyId);
-    
+    const appt: Appointment = findAppointmentById(copyId);
+
     return (
       <AppointmentTooltip.Content
         formatDate={() => ""}
         recurringIconComponent={DoctorContainer}
-        { ...restProps }
+        {...restProps}
       >
         <DoctorAppointmentModal appointment={appt} />
       </AppointmentTooltip.Content>
@@ -155,7 +155,7 @@ const DoctorContainer = () => {
 
       <br />
       {overviewTab && (
-        <div className="w-full h-96 flex justify-center px-8">
+        <div className="w-full flex justify-center px-8">
           <Paper>
             <Scheduler data={appointments}>
               <ViewState currentDate={currentDate} />

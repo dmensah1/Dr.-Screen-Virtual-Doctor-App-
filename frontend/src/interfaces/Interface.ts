@@ -54,6 +54,7 @@ export interface Patient {
   birthday: string;
   isDoctor: boolean;
   doctorId: string;
+  doctorName: string;
 }
 
 export interface Appointment {

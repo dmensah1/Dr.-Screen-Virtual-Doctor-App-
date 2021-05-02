@@ -16,5 +16,5 @@ export const addPatientToDoctor = async (doctorId: string, patientId: string) =>
 
 export const getPatients: (doctorId: string) => Promise<Patient[]> = async (doctorId: string) => {
   const res: any = await axios.get(`${URL}/getPatients/${doctorId}`);
-  return res
+  return res.data;
 };

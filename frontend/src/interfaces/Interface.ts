@@ -54,6 +54,7 @@ export interface Patient {
   birthday: string;
   isDoctor: boolean;
   doctorId: string;
+  doctorName: string;
 }
 
 export interface Appointment {
@@ -63,10 +64,13 @@ export interface Appointment {
   doctorName: string;
   followUpId: string;
   patientId: string;
-  symptoms: string[];
-  results: string[];
+  patientName: string;
+  symptoms: number[];
+  results: any[];
   note: string;
   time: Date;
+  startTime: string;
+  endTime: string;
 }
 
 export interface FollowUp {
@@ -75,13 +79,16 @@ export interface FollowUp {
   patientId: string;
   note: string;
   attachmentUrls: string[];
+  patientName?: string;
 }
 
 export interface Prescription {
+  id: string;
   doctorId: string;
   patientId: string;
   drugName: string;
   message: string;
   prescribedDate: string;
   duration: string;
+  renewalRequest: boolean;
 }

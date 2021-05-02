@@ -4,7 +4,7 @@ import { FollowUp } from '../interfaces/Interface';
 
 const URL = `${BACKEND_URL}/followups`;
 
-export const createFollowUp: (details: Partial<FollowUp>) => Promise<{followUp: string}> = async (details: Partial<FollowUp>) => {
+export const createFollowUp: (details: Partial<FollowUp>) => Promise<{ followUp: string }> = async (details: Partial<FollowUp>) => {
   const res: any = await axios.post(URL, details);
   return res;
 };
@@ -14,14 +14,14 @@ export const getFollowUp: (id: string) => Promise<FollowUp> = async (id: string)
   return res;
 };
 
-export const getDoctorFollowUps: (doctorId: string) => Promise<FollowUp> = async (doctorId: string) => {
+export const getDoctorFollowUps: (doctorId: string) => Promise<FollowUp[]> = async (doctorId: string) => {
   const res: any = await axios.get(`${URL}/forDoctor/${doctorId}`);
-  return res;
+  return res.data;
 };
 
-export const getPatientFollowUps: (patientId: string) => Promise<FollowUp> = async (patientId: string) => {
+export const getPatientFollowUps: (patientId: string) => Promise<FollowUp[]> = async (patientId: string) => {
   const res: any = await axios.get(`${URL}/forPatient/${patientId}`);
-  return res;
+  return res.data;
 };
 
 export const deleteFollowUp = async (followUpId: string) => {

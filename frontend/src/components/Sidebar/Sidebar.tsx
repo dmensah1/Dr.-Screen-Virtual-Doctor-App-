@@ -1,24 +1,32 @@
 import { useHistory } from "react-router";
+import * as React from "react";
+import { UserContextType } from "../../interfaces/Interface";
+import { useUser } from "../../contexts/UserProvider";
+
 
 const Sidebar = () => {
   const history = useHistory();
+  const [dashboard, setDashboard] = React.useState(true);
+  const [secondTab, setSecondTab] = React.useState(false);
+  const { userDetails, setUserDetails }: UserContextType = useUser();
 
   return (
     <>
-      <div className="bg-gray-200 h-full">
+      <div>
         <div className="flex flex-col sm:flex-row sm:justify-around">
           <div className="w-64 h-screen bg-white">
             <div className="flex items-center justify-center mt-10">
               <img
-                className="h-6"
-                src="https://premium-tailwindcomponents.netlify.app/assets/svg/tailwindcomponent-dark.svg"
+                className="h-24 w-24"
+                src="https://media.discordapp.net/attachments/837800676745674764/838234872849629244/logo3.png"
                 alt="logo"
               />
             </div>
 
             <nav className="mt-10">
               <a
-                className="flex items-center py-2 px-8 bg-gray-200 text-gray-700 border-r-4 border-gray-700"
+                // className="flex items-center py-2 px-8"
+                className={"flex items-center py-2 px-8 " + (dashboard ? "bg-gray-200 text-gray-700 border-r-4 border-gray-700" : "")}
                 href="/"
               >
                 <svg
@@ -39,27 +47,28 @@ const Sidebar = () => {
                 <span className="mx-4 font-medium">Dashboard</span>
               </a>
 
-              <a
-                className="flex items-center mt-5 py-2 px-8 text-gray-600 border-r-4 border-white hover:bg-gray-200 hover:text-gray-700 hover:border-gray-700"
-                href="/booking"
+              <div
+                className={"flex items-center mt-5 py-2 px-8 text-gray-600 border-r-4 border-white hover:bg-gray-200 hover:text-gray-700 hover:border-gray-700" + (secondTab ? "bg-gray-200 text-gray-700 border-r-4 border-gray-700" : "")}
+                // href= {userDetails.isDoctor ? "/patients": "/booking"} 
+                onClick={() => {
+                  setDashboard(false);
+                  setSecondTab(true);
+                  const where: string = userDetails.isDoctor ? '/patients' : '/booking'
+                  history.push(where);
+                }}
               >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-6 w-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                  />
-                </svg>
+                {userDetails.isDoctor ? (
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+                  </svg>
+                ) : (
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                  </svg>
+                )}
 
-                <span className="mx-4 font-medium">Make a Booking</span>
-              </a>
+                <span className="mx-4 font-medium">{userDetails.isDoctor ? 'Patients' : 'Make a Booking'}</span>
+              </div>
 
               <a
                 className="flex items-center mt-5 py-2 px-8 text-gray-600 border-r-4 border-white hover:bg-gray-200 hover:text-gray-700 hover:border-gray-700"

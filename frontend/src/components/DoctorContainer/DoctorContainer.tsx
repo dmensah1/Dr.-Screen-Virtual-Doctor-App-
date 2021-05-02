@@ -12,7 +12,6 @@ import { getDoctorAppt } from "../../services/appointmentService";
 import { getDoctorFollowUps} from "../../services/followUpService";
 import { Appointment, UserContextType, FollowUp } from "../../interfaces/Interface";
 import { useUser } from "../../contexts/UserProvider";
-import TestModal from "../Modal/TestModal";
 import DoctorAppointmentModal from "../Modal/DoctorAppointmentModal";
 
 const currentDate = "2021-05-02";
@@ -45,19 +44,13 @@ const DoctorContainer = () => {
         appointments.push({
           startDate: item.startTime,
           endDate: item.endTime,
-          title: `Checkup with ${item.patientId}`,
+          title: `Checkup with ${item.patientName}`,
           results: item.results,
           patientId: item.patientId,
           id: item.id,
           symptoms: item.symptoms,
           note: item.note
         });
-
-        // let details = {
-        //   id: item.id,
-        //   date: item.date,
-        //   symptoms: item.symptoms,
-        //   results,
       }
     }
 
@@ -91,7 +84,8 @@ const DoctorContainer = () => {
       note: '',
       time: new Date(),
       startTime: '',
-      endTime: ''
+      endTime: '',
+      patientName: ''
     };
 
     data.forEach(item => {

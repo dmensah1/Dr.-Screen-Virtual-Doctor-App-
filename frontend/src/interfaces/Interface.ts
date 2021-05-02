@@ -63,6 +63,7 @@ export interface Appointment {
   doctorName: string;
   followUpId: string;
   patientId: string;
+  patientName: string;
   symptoms: number[];
   results: any[];
   note: string;

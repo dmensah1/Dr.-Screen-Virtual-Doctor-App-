@@ -118,7 +118,8 @@ router.get('/forDoctor/:id', (req, res) => {
                         followUpId: doc.data().followUpId,
                         symptoms: doc.data().symptoms,
                         results: doc.data().results,
-                        note: doc.data().note
+                        note: doc.data().note,
+                        patientName: doc.data().patientName
                     }
                 )
             }

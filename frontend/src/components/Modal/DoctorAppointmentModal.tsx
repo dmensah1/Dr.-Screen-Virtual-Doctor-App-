@@ -88,7 +88,7 @@ const DoctorAppointmentModal = ({
                   <Disclosure.Panel className="px-4 pt-4 pb-2 text-sm text-gray-500">
                     <ul>
                       {diseases.map((item) => {
-                        return <li className="text-xl text-gray-700 font-semibold">{item.label} ↔️ <span className="text-green-600">{parseFloat(item.confidence.toFixed(4))}</span></li>;
+                        return <li className="text-xl text-gray-700 font-semibold">{item.label} ↔️ <span className="text-green-600">{parseFloat(item.confidence.toFixed(1))}%</span></li>;
                       })}
                     </ul>
                   </Disclosure.Panel>

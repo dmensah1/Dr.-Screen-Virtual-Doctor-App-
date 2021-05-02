@@ -129,9 +129,12 @@ router.put('/followUp/:id', (req, res) => {
 
 // get appts for a certain date for certain doctor
 // api/appointments/getForDay/:id
-router.get('/getForDay/:id', async (req, res) => {
+router.post('/getForDay/:id', async (req, res) => {
     let doctorId = req.params.id;
-    let dateToReturn = req.body.date;
+    let dateToReturn = req.body.data;
+
+    console.log(doctorId)
+    console.log(req.body)
 
     const appointmentsRef = db.collection('appointments');
     const snapshot = await appointmentsRef.where('doctorId', '==', doctorId).get();
@@ -143,7 +146,6 @@ router.get('/getForDay/:id', async (req, res) => {
     
     const daysAppointments = [];
     snapshot.forEach(doc => {
-        console.log(doc.id, '=>', doc.data());
 
         // this if statement might need altering
         if (doc.data().date == dateToReturn) {

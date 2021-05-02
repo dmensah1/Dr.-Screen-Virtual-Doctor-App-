@@ -72,6 +72,7 @@ router.put('/addPatient', (req, res) => {
 router.get('/getPatients/:id', async (req, res) => {
     let doctorId = req.params.id;
 
+      
     const patientsRef = db.collection('patients');
     const snapshot = await patientsRef.where('doctorId', '==', doctorId).get();
 

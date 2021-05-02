@@ -22,7 +22,7 @@ const ColumnContainer = ({
 }: ColumnContainerProps) => {
   return (
     <>
-      <div className="shadow-lg rounded-2xl bg-white dark:bg-gray-700 w-full md:w-3/12">
+      <div className="bg-indigo-50 shadow-lg rounded-2xl bg-white dark:bg-gray-700 w-full md:w-3/12">
         <div className="flex justify-center">
           <p className="font-bold text-s p-4 text-black dark:text-white">
             Upcoming Appointments
@@ -43,7 +43,7 @@ const ColumnContainer = ({
         </ul>
       </div>
 
-      <div className="shadow-lg rounded-2xl bg-white dark:bg-gray-700 w-full md:w-3/12">
+      <div className="bg-red-50 shadow-lg rounded-2xl bg-white dark:bg-gray-700 w-full md:w-3/12">
         <div className="flex justify-center">
           <p className="font-bold text-md p-4 text-black dark:text-white">
             Follow Ups
@@ -63,7 +63,7 @@ const ColumnContainer = ({
         </ul>
       </div>
 
-      <div className="shadow-lg rounded-2xl bg-white dark:bg-gray-700 w-full md:w-3/12">
+      <div className="bg-yellow-50 shadow-lg rounded-2xl bg-white dark:bg-gray-700 w-full md:w-3/12">
         <div className="flex justify-center">
           <p className="font-bold text-md p-4 text-black dark:text-white">
             Prescriptions

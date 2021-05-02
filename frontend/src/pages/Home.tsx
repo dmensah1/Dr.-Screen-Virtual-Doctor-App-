@@ -33,6 +33,7 @@ const Home = () => {
 
     const getFollowUps = async () => {
       const res = await getPatientFollowUps(userDetails.id);
+      console.log(res)
       setFollowUps(res)
     }
 
@@ -48,24 +49,24 @@ const Home = () => {
       <Sidebar />
 
       <div className="w-10/12">
-          {userDetails.isDoctor ? (
-            <>
+        {userDetails.isDoctor ? (
+          <>
             <DoctorContainer />
-              {/* <ColumnContainer /> */}
-              {/* <DoctorContainer /> */}
-            </>
-          ) : (
-            <>
-        <div className="flex flex-col md:flex-row p-8 justify-around">
+            {/* <ColumnContainer /> */}
+            {/* <DoctorContainer /> */}
+          </>
+        ) : (
+          <>
+            <div className="flex flex-col md:flex-row p-8 justify-around">
 
-              <PatientContainer appointments={appointments} followUps={followUps} prescriptions={prescription}/>
+              <PatientContainer appointments={appointments} followUps={followUps} prescriptions={prescription} />
               {/* <ColumnContainer />
               <ColumnContainer /> */}
-      </div>
+            </div>
 
-            </>
-          )}
-        </div>
+          </>
+        )}
+      </div>
 
 
     </main>

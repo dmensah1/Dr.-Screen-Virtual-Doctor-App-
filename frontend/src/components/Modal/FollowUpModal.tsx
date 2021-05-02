@@ -15,6 +15,7 @@ export default function FollowUpModal({ followUp }: FollowUpModalProps) {
         type="button"
         onClick={() => setShowModal(true)}
       >
+        Follow Up
       </button>
       {showModal ? (
         <>
@@ -27,7 +28,7 @@ export default function FollowUpModal({ followUp }: FollowUpModalProps) {
                 {/*header*/}
                 <div className="flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t">
                   <h3 className="text-3xl font-semibold">
-                    {followUp.patientId}
+                    Follow Up
                   </h3>
                   <button
                     className="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
@@ -42,26 +43,12 @@ export default function FollowUpModal({ followUp }: FollowUpModalProps) {
                 <div className="relative p-6 flex flex-row min-w-full">
                   <div className="w-3/12 text-blueGray-500 text-lg leading-relaxed text-right font-bold p-1">
                     <p>
-                      Date
-                    </p>
-                    <p>
-                      Time
-                    </p>
-                    <p>
                       Note
-                    </p>
-                    <p>
-                      Symptoms
                     </p>
                   </div>
                   <div className="w-9/12 p-1 text-blueGray-500 text-lg leading-relaxed">
                     <p>
-                    </p>
-                    <p>
-                    </p>
-                    <p>
-                    </p>
-                    <p>
+                      {followUp.note}
                     </p>
                   </div>
                 </div>

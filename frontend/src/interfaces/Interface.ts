@@ -64,7 +64,7 @@ export interface Appointment {
   followUpId: string;
   patientId: string;
   symptoms: number[];
-  results: string[];
+  results: any[];
   note: string;
   time: Date;
   startTime: string;

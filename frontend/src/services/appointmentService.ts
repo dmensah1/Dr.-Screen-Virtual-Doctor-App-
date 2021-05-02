@@ -12,7 +12,7 @@ export const getPatientAppt: (userId: string) => Promise<Appointment[]> = async 
   return res.data;
 };
 
-export const getDoctorAppt: (userId: string) => Promise<AppointmentModel[]> = async (userId: string) => {
+export const getDoctorAppt = async (userId: string) => {
   const res = await axios.get(`${DOCTOR_URL}/${userId}`);
   return res.data;
 };

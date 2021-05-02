@@ -14,14 +14,14 @@ export const getFollowUp: (id: string) => Promise<FollowUp> = async (id: string)
   return res;
 };
 
-export const getDoctorFollowUps: (doctorId: string) => Promise<FollowUp> = async (doctorId: string) => {
+export const getDoctorFollowUps: (doctorId: string) => Promise<FollowUp[]> = async (doctorId: string) => {
   const res: any = await axios.get(`${URL}/forDoctor/${doctorId}`);
-  return res;
+  return res.data;
 };
 
 export const getPatientFollowUps: (patientId: string) => Promise<FollowUp[]> = async (patientId: string) => {
   const res: any = await axios.get(`${URL}/forPatient/${patientId}`);
-  return res.data.data;
+  return res.data;
 };
 
 export const deleteFollowUp = async (followUpId: string) => {

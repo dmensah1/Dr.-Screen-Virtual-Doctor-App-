@@ -56,11 +56,11 @@ export default function AppointmentModal({ appointment }: AppointmentModalProps)
                 </div>
                 {/*body*/}
                 <div className="relative p-6 flex flex-row min-w-full">
-                  <ul className="list-disc">
+                  {/* <ul className="list-disc">
                     Test
                     <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit</li>
-                  </ul>
-                  {/* <div className="w-3/12 text-blueGray-500 text-lg leading-relaxed text-right font-bold p-1">
+                  </ul> */}
+                  <div className="w-3/12 text-blueGray-500 text-lg leading-relaxed text-right font-bold p-1">
                     <p>
                       Date
                     </p>
@@ -91,7 +91,7 @@ export default function AppointmentModal({ appointment }: AppointmentModalProps)
                         </>
                       ))}
                     </p>
-                  </div> */}
+                  </div>
                 </div>
                 {/*footer*/}
                 <div className="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import axios from "axios";
-import { BACKEND_URL, FIREBASE_SIGN_IN } from "../../config/config";
+import { FIREBASE_SIGN_IN, BACKEND_URL } from "../../config/config";
 import { User, UserContextType } from "../../interfaces/Interface";
 import { useUser } from "../../contexts/UserProvider";
 
@@ -39,7 +39,8 @@ const Login = () => {
     console.log(userID);
 
     if (token) {
-      const user: User = await getUser(userID);
+      const res: any = await getUser(userID);
+      const user: User = res.data
       console.log(user)
 
       // set local storage
@@ -50,11 +51,12 @@ const Login = () => {
         birthday: user.birthday,
         isDoctor: user.isDoctor,
         doctorId: user.doctorId,
+        doctorName: user.doctorName
       });
 
       history.push("/");
     }
-  };
+  }
 
   return (
     <section className="flex flex-col md:flex-row h-screen items-center">

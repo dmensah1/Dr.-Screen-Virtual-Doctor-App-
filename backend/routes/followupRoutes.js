@@ -24,6 +24,25 @@ router.post('/', (req, res) => {
 	});
 });
 
+// Add imgUrl to attachments
+// api/followUps/imgUpload
+router.put('/imgUpload', (req, res) => {
+    let followUpId = req.body.followUpId;
+    let imgUrl = req.body.imgUrl;
+
+    let followUpRef = db.collection('followups').doc(followUpId);
+
+    followUpRef.update({
+        attachmentUrls: admin.firestore.FieldValue.arrayUnion(imgUrl)
+    }).then(()=> {
+		console.log('Successfully added imgUrl');
+		res.status(200).send('Successfully added imgUrl');
+	}).catch(() => {
+		console.log('Failed to add imgUrl');
+		res.status(500).send('Failed to add imgUrl');
+	});
+});
+
 // Get a specific follow-up
 // api/followups/:id
 router.get('/:id', async (req, res) => {

@@ -1,5 +1,7 @@
 const express = require('express');
 const router = express.Router();
+// import * as tf from '@tensorflow/tfjs';
+const tf = require('@tensorflow/tfjs-node');
 
 // Firebase
 const admin = require('firebase-admin');
@@ -7,7 +9,10 @@ const db = admin.firestore();
 
 // creates an appt
 // api/appointments/
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
+    const model = await tf.loadLayersModel('http://localhost:4000/model.json');
+    // const boolSymptomsArr = req.body.symptoms;
+    const boolSymptomsArr = [1,0,1,0,0,0,0,0,1,0,0,0,1,0,1,0,0,1,0,0];
 
     db.collection('appointments').add({
         date:  req.body.date,
@@ -19,15 +24,43 @@ router.post('/', (req, res) => {
         symptoms: req.body.symptoms,
         results: [],
         note: req.body.note
-    }).then(doc => {
+    }).then(async doc => {
 		console.log('Added an appt document with ID: ' + doc.id);
-		res.status(200).json({
-            apptId: doc.id
-        });
+        const example = [boolSymptomsArr]
+        const prediction = model.predict(tf.tensor(example));
+
+        //converting predictions
+        let unsortedPredictions = await prediction.array();
+        let tempPredictions = [...unsortedPredictions[0]];
+        unsortedPredictions = unsortedPredictions[0];
+        let sortedArray = [];
+
+        let sortedPredictions = tempPredictions.sort();
+        sortedPredictions.forEach(element => {
+            if(!element.toString().includes('e')) {
+                sortedArray.push(element);
+            }
+        })
+        sortedArray = sortedArray.slice(Math.max(sortedArray.length - 5, 0))
+        
+        // in order of lowest to highest confidence
+        let indexArray = []
+        for (let i = 0; i < sortedArray.length; i++) {
+            for (let j = 0; j < unsortedPredictions.length; j++) {
+                if (sortedArray[i] == unsortedPredictions[j]) {
+                    let result = {index: j, confidencePercent: unsortedPredictions[j]*100}
+                    indexArray.push(result)
+                    break;
+                }
+            }
+        }
+        console.log(indexArray)
+        
+		res.status(200).json({apptId: doc.id, indexArray});
 	}).catch(error => {
 		console.log(error);
 		res.status(500);
-	});
+    });
 });
 
 
@@ -73,7 +106,7 @@ router.get('/forDoctor/:id', (req, res) => {
             }
         });
         res.status(200).json(doctorsAppts)
-    });    
+    });
 })
 
 
@@ -103,7 +136,7 @@ router.get('/forPatient/:id', (req, res) => {
             }
         });
         res.status(200).json(patientsAppts)
-    }); 
+    });
 });
 
 
@@ -143,27 +176,13 @@ router.post('/getForDay/:id', async (req, res) => {
         console.log('No matching documents.');
         return;
     }
-    
+
     const daysAppointments = [];
     snapshot.forEach(doc => {
 
         // this if statement might need altering
         if (doc.data().date == dateToReturn) {
-            // daysAppointments.push({
-            //     id: doc.id,
-            //     date: doc.data().date,
-            //     time: doc.data().time,
-            //     doctorId: doc.data().doctorId,
-            //     doctorName: doc.data().doctorName,
-            //     patientId: doc.data().patientId,
-            //     followUpId: doc.data().followUpId,
-            //     symptoms: doc.data().symptoms,
-            //     results: doc.data().results,
-            //     note: doc.data().note
-            // })
-            daysAppointments.push(
-                doc.data().time
-            )
+            daysAppointments.push(doc.data().time)
         }
     });
 

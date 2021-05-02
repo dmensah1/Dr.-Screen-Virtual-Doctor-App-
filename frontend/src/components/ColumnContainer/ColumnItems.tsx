@@ -4,7 +4,6 @@ import Modal from '../Modal/Modal'
 const ColumnItems = () => {
   return (
     <li className="flex items-center text-gray-600 dark:text-gray-200 justify-between py-3 border-b-2 border-gray-100 dark:border-gray-800 hover:bg-gray-100 cursor-pointer">
-        <Modal />
 
       {/* <div className="flex items-center justify-start text-sm">
         <span className="mx-4">01</span>

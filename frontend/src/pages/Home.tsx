@@ -7,17 +7,17 @@ import { getPatientAppt } from '../services/appointmentService'
 import PatientContainer from '../components/PatientContainer/PatientContainer'
 
 const Home = () => {
-  const { userDetails}: UserContextType = useUser();
+  const { userDetails }: UserContextType = useUser();
   const [appointments, setAppointments] = React.useState<Appointment[]>([]);
   const [followUps, setFollowUps] = React.useState<FollowUp[]>([]);
   const [prescription, setPrescription] = React.useState<Prescription[]>([]);
-  
+
   // fetch appointments on load
   React.useEffect(() => {
     const getAppointments = async () => {
       const res = await getPatientAppt(userDetails.id);
 
-      setAppointments(res.data);
+      setAppointments(res);
       console.log(appointments)
     }
 

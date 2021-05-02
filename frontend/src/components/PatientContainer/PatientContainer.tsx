@@ -5,6 +5,7 @@ import {
   Prescription,
 } from "../../interfaces/Interface";
 import Modal from "../Modal/Modal";
+import AppointmentModal from "../Modal/AppointmentModal";
 
 type ColumnContainerProps = {
   appointments: Appointment[];
@@ -20,17 +21,20 @@ const ColumnContainer = ({
   return (
     <>
       <div className="shadow-lg rounded-2xl bg-white dark:bg-gray-700 w-full md:w-3/12">
-        <p className="font-bold text-s p-4 text-black dark:text-white">
-          Upcoming Appointments
+        <div className="flex justify-center">
+          <p className="font-bold text-s p-4 text-black dark:text-white">
+            Upcoming Appointments
           <span className="text-sm text-gray-500 dark:text-gray-300 dark:text-white ml-2">
-            ({appointments.length})
+              ({appointments.length})
           </span>
-        </p>
+          </p>
+
+        </div>
         <ul>
           {appointments.map((item, index) => {
             return (
-              <li className="flex items-center text-gray-600 dark:text-gray-200 justify-between py-3 border-b-2 border-gray-100 dark:border-gray-800 hover:bg-gray-100 cursor-pointer">
-                <Modal />
+              <li className="flex items-center text-gray-600 dark:text-gray-200 justify-center py-3 border-b-2 border-gray-100 dark:border-gray-800 hover:bg-gray-100 cursor-pointer">
+                <AppointmentModal appointment={item} />
               </li>
             );
           })}
@@ -38,17 +42,19 @@ const ColumnContainer = ({
       </div>
 
       <div className="shadow-lg rounded-2xl bg-white dark:bg-gray-700 w-full md:w-3/12">
-        <p className="font-bold text-md p-4 text-black dark:text-white">
-          Follow Ups
+        <div className="flex justify-center">
+          <p className="font-bold text-md p-4 text-black dark:text-white">
+            Follow Ups
           <span className="text-sm text-gray-500 dark:text-gray-300 dark:text-white ml-2">
-            ({followUps.length})
+              ({followUps.length})
           </span>
-        </p>
+          </p>
+        </div>
         <ul>
-        {followUps.map((item, index) => {
+          {followUps.map((item, index) => {
             return (
               <li className="flex items-center text-gray-600 dark:text-gray-200 justify-between py-3 border-b-2 border-gray-100 dark:border-gray-800 hover:bg-gray-100 cursor-pointer">
-                <Modal />
+                <Modal label={item.patientId} />
               </li>
             );
           })}
@@ -56,17 +62,19 @@ const ColumnContainer = ({
       </div>
 
       <div className="shadow-lg rounded-2xl bg-white dark:bg-gray-700 w-full md:w-3/12">
-        <p className="font-bold text-md p-4 text-black dark:text-white">
-          Prescriptions
+        <div className="flex justify-center">
+          <p className="font-bold text-md p-4 text-black dark:text-white">
+            Prescriptions
           <span className="text-sm text-gray-500 dark:text-gray-300 dark:text-white ml-2">
-            ({prescriptions.length})
+              ({prescriptions.length})
           </span>
-        </p>
+          </p>
+        </div>
         <ul>
-        {prescriptions.map((item, index) => {
+          {prescriptions.map((item, index) => {
             return (
               <li className="flex items-center text-gray-600 dark:text-gray-200 justify-between py-3 border-b-2 border-gray-100 dark:border-gray-800 hover:bg-gray-100 cursor-pointer">
-                <Modal />
+                <Modal label={item.drugName} />
               </li>
             );
           })}

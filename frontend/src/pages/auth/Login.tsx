@@ -16,6 +16,7 @@ const Login = () => {
 
     return await axios.get(`${BACKEND_URL}/doctors/${userId}`);
     // return await axios.get(`${BACKEND_URL}/patients/${userId}`);
+
   };
 
   const signInWithEmailAndPassword = async () => {

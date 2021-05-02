@@ -26,72 +26,34 @@ export default function PrescriptionModal({ prescription }: PrescriptionModalPro
       </button>
       {showModal ? (
         <>
-          <div
-            className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none"
-          >
-            <div className="relative w-9/12 my-6 mx-auto max-w-3xl">
-              {/*content*/}
-              <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
-                {/*header*/}
-                <div className="flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t">
-                  <h3 className="text-3xl font-semibold">
-                    {prescription.drugName}
-                  </h3>
-                  <button
-                    className="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
-                    onClick={() => setShowModal(false)}
-                  >
-                    <span className="bg-transparent text-black opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none">
-                      ×
-                    </span>
-                  </button>
+          <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
+            <div className="max-w-4xl  bg-white w-full rounded-lg shadow-xl">
+              <div className="p-4 border-b">
+                <h2 className="text-2xl ">Appointment Information</h2>
+                <p className="text-sm text-gray-500">
+                  Personal details for your appointment.
+                </p>
+              </div>
+              <div>
+                <div className="md:grid md:grid-cols-2 hover:bg-gray-50 md:space-y-0 space-y-1 p-4 border-b">
+                  <p className="text-gray-600">Duration</p>
+                  <p>{prescription.duration}</p>
                 </div>
-                {/*body*/}
-                <div className="relative p-6 flex flex-row min-w-full">
-                  <div className="w-3/12 text-blueGray-500 text-lg leading-relaxed text-right font-bold p-1">
-                    <p>
-                      Duration
-                    </p>
-                    <p>
-                      Prescribed Date
-                    </p>
-                    <p>
-                      Message
-                    </p>
-                    <p>
-                      Renewal Request
-                    </p>
-                  </div>
-                  <div className="w-9/12 p-1 text-blueGray-500 text-lg leading-relaxed">
-                    <p>
-                      {prescription.duration}
-                    </p>
-                    <p>
-                      {prescription.prescribedDate}
-                    </p>
-                    <p>
-                      {prescription.message}
-                    </p>
-                    <p className="capitalize">
-                      {hideRenewal.toString()}
-                    </p>
-                  </div>
+                <div className="md:grid md:grid-cols-2 hover:bg-gray-50 md:space-y-0 space-y-1 p-4 border-b">
+                  <p className="text-gray-600">Prescribed Date</p>
+                  <p>{prescription.prescribedDate}</p>
                 </div>
-                {/*footer*/}
-                <div className="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
-                  {!hideRenewal && (
-                    <button
-                      className="bg-emerald-500 text-black active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                      type="button"
-                      onClick={handleRequest}
-                    >
-                      Request Renewal
-                    </button>
-
-                  )}
+                <div className="md:grid md:grid-cols-2 hover:bg-gray-50 md:space-y-0 space-y-1 p-4 border-b">
+                  <p className="text-gray-600">Message</p>
+                  <p>{prescription.message}</p>
+                </div>
+                <div className="md:grid md:grid-cols-2 hover:bg-gray-50 md:space-y-0 space-y-1 p-4 border-b">
+                  <p className="text-gray-600">Renewal Request</p>
+                  <p>{hideRenewal.toString()}</p>
+                </div>
+                <div className="flex justify-end">
                   <button
-                    className="bg-emerald-500 text-black active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                    type="button"
+                    className="py-2 px-4 bg-gray-200 rounded-md"
                     onClick={() => setShowModal(false)}
                   >
                     Close
@@ -100,7 +62,6 @@ export default function PrescriptionModal({ prescription }: PrescriptionModalPro
               </div>
             </div>
           </div>
-          <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
         </>
       ) : null}
     </>

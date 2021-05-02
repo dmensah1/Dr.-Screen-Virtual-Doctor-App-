@@ -26,10 +26,7 @@ export const addFollowUp = async (apptId: string) => {
   return await axios.put(`${APPT_URL}/followUp/${apptId}`);
 };
 
-export const getApptDay: (doctorId: string, date: Date | Date[]) => Promise<Appointment[]> = async (doctorId: string, date: Date | Date[]) => {
-  const req = {
-    date: date
-  }
-  const res: any = await axios.get(`${APPT_URL}/getForDay/${doctorId}`, {data: req});
-  return res;
+export const getApptDay: (doctorId: string, date: Date | Date[]) => Promise<string[]> = async (doctorId: string, date: Date | Date[]) => {
+  const res: any = await axios.post(`${APPT_URL}/getForDay/${doctorId}`, {data: date});
+  return res.data;
 };

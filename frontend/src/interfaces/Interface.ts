@@ -5,6 +5,7 @@ export interface User {
   birthday: string;
   isDoctor: boolean;
   doctorId: string;
+  doctorName: string;
 }
 
 export interface AuthResponseData {
@@ -24,10 +25,13 @@ export interface UserContextType {
 }
 
 export interface AppointmentRequest {
-  date: string;
+  date: Date | Date[] | undefined;
   doctorId: string;
+  doctorName: string;
   patientId: string;
-  followUpId: string;
+  symptoms: number[];
+  note: string;
+  time: string | undefined;
 }
 
 export interface AppointmentResponse {
@@ -53,11 +57,16 @@ export interface Patient {
 }
 
 export interface Appointment {
-  date: string;
-  doctorId: string;
-  followUpId: string;
   id: string;
+  date: Date;
+  doctorId: string;
+  doctorName: string;
+  followUpId: string;
   patientId: string;
+  symptoms: string[];
+  results: string[];
+  note: string;
+  time: Date;
 }
 
 export interface FollowUp {

@@ -9,6 +9,16 @@ This project was built for RU Hacks 2021. See more information [here](https://de
 We are a group of university students from Dalhousie University, Western University and University of Toronto. 
 
 ## Steps for Local Deployment
+- `git clone https://github.com/dmensah1/ruhacks-bedfordlions.git`
+- In terminal 1
+  - `cd backend`
+  - `npm install`
+  - `npm start`
+- In terminal 2
+  - `cd frontend`
+  - `npm install`
+  - `npm start`
+- The application is now accessible at `http://localhost:3000` 
 
  
 ## Inspiration

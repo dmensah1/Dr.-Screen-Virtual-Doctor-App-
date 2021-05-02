@@ -6,6 +6,8 @@ import {
 } from "../../interfaces/Interface";
 import Modal from "../Modal/Modal";
 import AppointmentModal from "../Modal/AppointmentModal";
+import PrescriptionModal from '../Modal/PrescriptionModal';
+import FollowUpModal from '../Modal/FollowUpModal';
 
 type ColumnContainerProps = {
   appointments: Appointment[];
@@ -53,8 +55,8 @@ const ColumnContainer = ({
         <ul>
           {followUps.map((item, index) => {
             return (
-              <li className="flex items-center text-gray-600 dark:text-gray-200 justify-between py-3 border-b-2 border-gray-100 dark:border-gray-800 hover:bg-gray-100 cursor-pointer">
-                <Modal label={item.patientId} />
+              <li className="flex items-center text-gray-600 dark:text-gray-200 justify-center py-3 border-b-2 border-gray-100 dark:border-gray-800 hover:bg-gray-100 cursor-pointer">
+                <FollowUpModal followUp={item} />
               </li>
             );
           })}
@@ -73,8 +75,8 @@ const ColumnContainer = ({
         <ul>
           {prescriptions.map((item, index) => {
             return (
-              <li className="flex items-center text-gray-600 dark:text-gray-200 justify-between py-3 border-b-2 border-gray-100 dark:border-gray-800 hover:bg-gray-100 cursor-pointer">
-                <Modal label={item.drugName} />
+              <li className="flex items-center text-gray-600 dark:text-gray-200 justify-center py-3 border-b-2 border-gray-100 dark:border-gray-800 hover:bg-gray-100 cursor-pointer">
+                <PrescriptionModal prescription={item} />
               </li>
             );
           })}

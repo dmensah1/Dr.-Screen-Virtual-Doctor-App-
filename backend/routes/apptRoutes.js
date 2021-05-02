@@ -10,6 +10,9 @@ const db = admin.firestore();
 // creates an appt
 // api/appointments/
 router.post('/', async (req, res) => {
+    const model = await tf.loadLayersModel('http://localhost:4000/model.json');
+    // const boolSymptomsArr = req.body.symptoms;
+    const boolSymptomsArr = [1,0,1,0,0,0,0,0,1,0,0,0,1,0,1,0,0,1,0,0];
 
     db.collection('appointments').add({
         date:  req.body.date,
@@ -21,8 +24,39 @@ router.post('/', async (req, res) => {
         symptoms: req.body.symptoms,
         results: [],
         note: req.body.note
-    }).then(doc => {
+    }).then(async doc => {
 		console.log('Added an appt document with ID: ' + doc.id);
+        const example = [boolSymptomsArr]
+
+        const prediction = model.predict(tf.tensor(example));
+
+        //converting predictions
+        let unsortedPredictions = await prediction.array();
+        let tempPredictions = [...unsortedPredictions[0]];
+        unsortedPredictions = unsortedPredictions[0];
+        let sortedArray = [];
+
+        let sortedPredictions = tempPredictions.sort();
+        sortedPredictions.forEach(element => {
+            if(!element.toString().includes('e')) {
+                sortedArray.push(element);
+            }
+        })
+        sortedArray = sortedArray.slice(Math.max(sortedArray.length - 5, 0))
+        
+        // in order of lowest to highest confidence
+        let indexArray = []
+        for (let i = 0; i < sortedArray.length; i++) {
+            for (let j = 0; j < unsortedPredictions.length; j++) {
+                if (sortedArray[i] == unsortedPredictions[j]) {
+                    let result = {index: j, confidenceNum: unsortedPredictions[j]}
+                    indexArray.push(result)
+                    break;
+                }
+            }
+        }
+        console.log(indexArray)
+        
 		res.status(200).json({
             apptId: doc.id
         });
@@ -30,16 +64,6 @@ router.post('/', async (req, res) => {
 		console.log(error);
 		res.status(500);
     });
-
-    const model = await tf.loadLayersModel('http://localhost:4000/model.json');
-   
-    //TODO: convert symptoms to bool
-    const example = [[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]]
-    const prediction = model.predict(tf.tensor(example));
-    console.log(await prediction.array());
-    //TODO: convert prediction
-
-
 });
 
 

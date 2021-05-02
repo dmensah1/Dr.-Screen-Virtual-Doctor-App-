@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Paper } from "@material-ui/core";
-import { ViewState, AppointmentModel } from "@devexpress/dx-react-scheduler";
+import { ViewState, AppointmentModel, AppointmentTooltip } from "@devexpress/dx-react-scheduler";
 import {
   Scheduler,
   DayView,
@@ -53,7 +53,7 @@ const DoctorContainer = () => {
     arrayOfAppointmentData();
     console.log(appointments)
   }, []);
-  
+
 
   return (
     <div className="flex flex-col justify-center font-sans">
@@ -98,7 +98,7 @@ const DoctorContainer = () => {
               <ViewState currentDate={currentDate} />
               <DayView startDayHour={9.5} endDayHour={17} />
               <Appointments />
-            </Scheduler>  
+            </Scheduler>
           </Paper>
         </div>
       )}

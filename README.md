@@ -1,5 +1,7 @@
 # RU Hacks 2021 - Bedford Lions
 
+![image](https://user-images.githubusercontent.com/46732681/116830553-0ba9c500-ab79-11eb-90fa-785789246aff.png)
+
 This project was built for RU Hacks 2021. See more information [here](https://devpost.com/software/dr-screen)
 
 ## Who We Are

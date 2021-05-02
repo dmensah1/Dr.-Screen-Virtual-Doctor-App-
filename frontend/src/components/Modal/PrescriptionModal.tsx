@@ -1,27 +1,19 @@
 import * as React from "react";
-import { SYMPTOMS } from '../../interfaces/constants';
-import { Appointment } from '../../interfaces/Interface';
+import { Prescription } from '../../interfaces/Interface';
+import { requestRenewal } from '../../services/prescriptionService';
 
-type AppointmentModalProps = {
-  appointment: Appointment
-}
+type PrescriptionModalProps = {
+  prescription: Prescription
+};
 
-export default function AppointmentModal({ appointment }: AppointmentModalProps) {
+export default function PrescriptionModal({ prescription }: PrescriptionModalProps) {
   const [showModal, setShowModal] = React.useState(false);
-  const [symptoms, setSymptoms] = React.useState<string[]>([])
+  const [hideRenewal, setHideRenewal] = React.useState<boolean>(prescription.renewalRequest)
 
-  React.useEffect(() => {
-    const names = [];
-    if (appointment.symptoms) {
-      for (let i = 0; i < appointment.symptoms.length; i++) {
-        if (appointment.symptoms[i] === 1) {
-          names.push(SYMPTOMS[i].label)
-        }
-      }
-      setSymptoms(names);
-      console.log(symptoms)
-    }
-  }, [appointment])
+  const handleRequest = async () => {
+    await requestRenewal(prescription.id)
+    setHideRenewal(true)
+  }
 
   return (
     <>
@@ -30,7 +22,7 @@ export default function AppointmentModal({ appointment }: AppointmentModalProps)
         type="button"
         onClick={() => setShowModal(true)}
       >
-        {appointment.date.toString().slice(0, 10)}  {appointment.time}
+        {prescription.drugName}
       </button>
       {showModal ? (
         <>
@@ -43,7 +35,7 @@ export default function AppointmentModal({ appointment }: AppointmentModalProps)
                 {/*header*/}
                 <div className="flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t">
                   <h3 className="text-3xl font-semibold">
-                    {appointment.doctorName}
+                    {prescription.drugName}
                   </h3>
                   <button
                     className="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
@@ -58,39 +50,45 @@ export default function AppointmentModal({ appointment }: AppointmentModalProps)
                 <div className="relative p-6 flex flex-row min-w-full">
                   <div className="w-3/12 text-blueGray-500 text-lg leading-relaxed text-right font-bold p-1">
                     <p>
-                      Date
+                      Duration
                     </p>
                     <p>
-                      Time
+                      Prescribed Date
                     </p>
                     <p>
-                      Note
+                      Message
                     </p>
                     <p>
-                      Symptoms
+                      Renewal Request
                     </p>
                   </div>
                   <div className="w-9/12 p-1 text-blueGray-500 text-lg leading-relaxed">
                     <p>
-                      {appointment.date.toString().slice(0, 10)}
+                      {prescription.duration}
                     </p>
                     <p>
-                      {appointment.time}
+                      {prescription.prescribedDate}
                     </p>
                     <p>
-                      {appointment.note}
+                      {prescription.message}
                     </p>
-                    <p>
-                      {symptoms.map((item) => (
-                        <>
-                          {`${item}, `}
-                        </>
-                      ))}
+                    <p className="capitalize">
+                      {hideRenewal.toString()}
                     </p>
                   </div>
                 </div>
                 {/*footer*/}
                 <div className="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
+                  {!hideRenewal && (
+                    <button
+                      className="bg-emerald-500 text-black active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                      type="button"
+                      onClick={handleRequest}
+                    >
+                      Request Renewal
+                    </button>
+
+                  )}
                   <button
                     className="bg-emerald-500 text-black active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                     type="button"
@@ -107,5 +105,5 @@ export default function AppointmentModal({ appointment }: AppointmentModalProps)
       ) : null}
     </>
   );
-}
 
+}

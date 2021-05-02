@@ -78,10 +78,12 @@ export interface FollowUp {
 }
 
 export interface Prescription {
+  id: string;
   doctorId: string;
   patientId: string;
   drugName: string;
   message: string;
   prescribedDate: string;
   duration: string;
+  renewalRequest: boolean;
 }

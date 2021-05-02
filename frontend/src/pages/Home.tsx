@@ -1,5 +1,5 @@
 import * as React from 'react'
-import ColumnContainer from "../components/ColumnContainer/ColumnContainer";
+import DoctorContainer from "../components/DoctorContainer/DoctorContainer";
 import Sidebar from "../components/Sidebar/Sidebar"
 import { useUser } from "../contexts/UserProvider";
 import { UserContextType, Appointment, FollowUp, Prescription } from "../interfaces/Interface";
@@ -30,22 +30,25 @@ const Home = () => {
     <main className="flex">
       <Sidebar />
 
-      <div className="bg-gray-100 w-10/12">
-        <div className="flex flex-col md:flex-row p-8 justify-around">
+      <div className="w-10/12">
           {userDetails.isDoctor ? (
             <>
+            <DoctorContainer />
               {/* <ColumnContainer /> */}
               {/* <DoctorContainer /> */}
             </>
           ) : (
             <>
+        <div className="flex flex-col md:flex-row p-8 justify-around">
+
               <PatientContainer appointments={appointments} followUps={followUps} prescriptions={prescription}/>
               {/* <ColumnContainer />
               <ColumnContainer /> */}
+      </div>
+
             </>
           )}
         </div>
-      </div>
 
 
     </main>

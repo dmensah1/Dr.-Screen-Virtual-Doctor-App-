@@ -8,12 +8,15 @@ import { useUser } from "../../contexts/UserProvider";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { setUserDetails }: UserContextType = useUser();
+  const { userDetails, setUserDetails }: UserContextType = useUser();
 
   const history = useHistory();
 
   const getUser: any = async (userId: string) => {
-    return await axios.get(`${BACKEND_URL}/patients/${userId}`);
+
+    return await axios.get(`${BACKEND_URL}/doctors/${userId}`);
+    // return await axios.get(`${BACKEND_URL}/patients/${userId}`);
+
   };
 
   const signInWithEmailAndPassword = async () => {
@@ -37,6 +40,7 @@ const Login = () => {
       .catch((error) => error.message);
 
     console.log(userID);
+    console.log(token)
 
     if (token) {
       const res: any = await getUser(userID);

@@ -27,7 +27,6 @@ router.post('/', async (req, res) => {
     }).then(async doc => {
 		console.log('Added an appt document with ID: ' + doc.id);
         const example = [boolSymptomsArr]
-
         const prediction = model.predict(tf.tensor(example));
 
         //converting predictions
@@ -49,7 +48,7 @@ router.post('/', async (req, res) => {
         for (let i = 0; i < sortedArray.length; i++) {
             for (let j = 0; j < unsortedPredictions.length; j++) {
                 if (sortedArray[i] == unsortedPredictions[j]) {
-                    let result = {index: j, confidenceNum: unsortedPredictions[j]}
+                    let result = {index: j, confidencePercent: unsortedPredictions[j]*100}
                     indexArray.push(result)
                     break;
                 }
@@ -57,9 +56,7 @@ router.post('/', async (req, res) => {
         }
         console.log(indexArray)
         
-		res.status(200).json({
-            apptId: doc.id
-        });
+		res.status(200).json({apptId: doc.id, indexArray});
 	}).catch(error => {
 		console.log(error);
 		res.status(500);

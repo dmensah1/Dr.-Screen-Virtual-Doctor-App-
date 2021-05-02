@@ -10,6 +10,7 @@ import { createAppt, getApptDay } from "../../services/appointmentService";
 import Select from "react-select";
 import { SYMPTOMS, AVAIL_TIMES } from "../../interfaces/constants";
 import makeAnimated from "react-select/animated";
+import { useHistory } from "react-router";
 
 const Form = () => {
   const [date, setDate] = React.useState<Date[] | Date>();
@@ -22,6 +23,7 @@ const Form = () => {
   const [schedule, setSchedule] = React.useState(true);
   const [daySchedule, setDaySchedule] = React.useState(false);
 
+  const history = useHistory();
   const animatedComponents = makeAnimated();
 
   const handleInput = async () => {
@@ -54,10 +56,12 @@ const Form = () => {
     if (res) {
       console.log(res);
     }
+    history.push("/")
   };
 
   const submitTime = () => {
     setSchedule(!schedule);
+    
   };
 
 
@@ -171,7 +175,7 @@ const Form = () => {
                                             Back
                                         </button>
                                         <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={submitTime}>
-                                            Submit
+                                            Next
                                         </button>
                                     </div>
                                 </div>
@@ -215,7 +219,7 @@ const Form = () => {
                     Back
                   </button>
                   <button
-                    className="px-3 py-2 bg-indigo-200 rounded-full"
+                    className="px-3 py-2 bg-indigo-200 rounded-full mx-4"
                     onClick={() => handleInput()}
                   >
                     Submit

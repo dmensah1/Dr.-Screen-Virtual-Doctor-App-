@@ -1,5 +1,7 @@
 # RU Hacks 2021 - Bedford Lions
 
+## Dr. Screen
+
 ![image](https://user-images.githubusercontent.com/46732681/116830553-0ba9c500-ab79-11eb-90fa-785789246aff.png)
 
 This project was built for RU Hacks 2021. See more information [here](https://devpost.com/software/dr-screen)
@@ -8,6 +10,12 @@ This project was built for RU Hacks 2021. See more information [here](https://de
 
 We are a group of university students from Dalhousie University, Western University and University of Toronto. 
 
+## Table of Contents
+
+1. [Local Deployment](#local_deployment)
+
+
+<a name="local_deployment"></>
 ## Steps for Local Deployment
 - `git clone https://github.com/dmensah1/ruhacks-bedfordlions.git`
 - In terminal 1
@@ -44,3 +52,20 @@ Lastly, our app allows the doctors to schedule follow-ups with their patients to
 We built Dr. Screen using React, Express, Node.js, and Firebase. We chose to use Firebase for our database due to prior experience amongst team members and also for its easy to integrate user authentication mechanism as well as individual functions we could deploy to serve specific purposes such as image uploads to the cloud. Our machine learning model used to predict possible illnesses based on patient symptoms was built using Tensorflow. Furthermore, we used numerous node packages such as React Material UI for specific features found on the application.
 
 For our model we used an MLP neural network trained on a dataset from Kaggle linking symptoms to diseases. We treat it as a multiclass-classification task such that the model outputs probabilities for each disease. Based on a simple selection of the highest probability disease, we were able to achieve 87.4% accuracy on a held out test set.
+
+## Screenshots
+
+![doctor_followups](https://user-images.githubusercontent.com/39662044/116831822-17e94e80-ab88-11eb-9644-bec7e4765596.png)
+![doctor_home](https://user-images.githubusercontent.com/39662044/116831823-1881e500-ab88-11eb-940b-d9fa01c939ae.png)
+![doctor_home_appt_details](https://user-images.githubusercontent.com/39662044/116831824-1881e500-ab88-11eb-9e1c-59de90365164.png)
+![doctors_patients](https://user-images.githubusercontent.com/39662044/116831825-1881e500-ab88-11eb-8080-e10b7c11d306.png)
+![login](https://user-images.githubusercontent.com/39662044/116831826-1881e500-ab88-11eb-8c01-1572a14e8dda.png)
+![patient_appt_details](https://user-images.githubusercontent.com/39662044/116831827-191a7b80-ab88-11eb-80da-4ff079a74556.png)
+![patient_appt_note](https://user-images.githubusercontent.com/39662044/116831828-191a7b80-ab88-11eb-9ca6-225d01b839cf.png)
+![patient_appt_symptoms](https://user-images.githubusercontent.com/39662044/116831829-191a7b80-ab88-11eb-82a8-65d4b3a51555.png)
+![patient_appt_times](https://user-images.githubusercontent.com/39662044/116831831-191a7b80-ab88-11eb-9c11-af02710b8f97.png)
+![patient_followup_details](https://user-images.githubusercontent.com/39662044/116831833-19b31200-ab88-11eb-9a38-78bbd87c551d.png)
+![patient_home](https://user-images.githubusercontent.com/39662044/116831834-19b31200-ab88-11eb-80a4-4206e7f9d9f7.png)
+![patient_prescriptions](https://user-images.githubusercontent.com/39662044/116831835-19b31200-ab88-11eb-84c9-d9d10311e7de.png)
+![patient_schedule_appt](https://user-images.githubusercontent.com/39662044/116831836-19b31200-ab88-11eb-9ef2-5e88a378ccd9.png)
+

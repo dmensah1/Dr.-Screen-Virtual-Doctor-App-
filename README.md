@@ -65,17 +65,28 @@ For our model we used an MLP neural network trained on a dataset from Kaggle lin
 
 ## Screenshots
 
-![doctor_followups](https://user-images.githubusercontent.com/39662044/116831822-17e94e80-ab88-11eb-9644-bec7e4765596.png)
+Doctor home page. Doctors are able to see an overview of appointments for that day
 ![doctor_home](https://user-images.githubusercontent.com/39662044/116831823-1881e500-ab88-11eb-940b-d9fa01c939ae.png)
+Details of an appointment. Doctors are able to have an idea of the patients symptoms and possible diseases prior to the appointment
 ![doctor_home_appt_details](https://user-images.githubusercontent.com/39662044/116831824-1881e500-ab88-11eb-9e1c-59de90365164.png)
+Doctors can send follow up notes to their patients after an appointment
+![doctor_followups](https://user-images.githubusercontent.com/39662044/116831822-17e94e80-ab88-11eb-9644-bec7e4765596.png)
+Doctors are able to view all their patients
 ![doctors_patients](https://user-images.githubusercontent.com/39662044/116831825-1881e500-ab88-11eb-8080-e10b7c11d306.png)
-![login](https://user-images.githubusercontent.com/39662044/116831826-1881e500-ab88-11eb-8c01-1572a14e8dda.png)
-![patient_appt_details](https://user-images.githubusercontent.com/39662044/116831827-191a7b80-ab88-11eb-80da-4ff079a74556.png)
+Patient home page. Patients can see their upcoming appointments, follow ups from their doctor and their prescriptions
+![patient_home](https://user-images.githubusercontent.com/39662044/116831834-19b31200-ab88-11eb-80a4-4206e7f9d9f7.png)
+Patients can view available appointment times
+![patient_schedule_appt](https://user-images.githubusercontent.com/39662044/116831836-19b31200-ab88-11eb-9ef2-5e88a378ccd9.png)
+![patient_appt_times](https://user-images.githubusercontent.com/39662044/116831831-191a7b80-ab88-11eb-9c11-af02710b8f97.png)
+
+Patients can input their symptoms and provide an additional note
 ![patient_appt_note](https://user-images.githubusercontent.com/39662044/116831828-191a7b80-ab88-11eb-9ca6-225d01b839cf.png)
 ![patient_appt_symptoms](https://user-images.githubusercontent.com/39662044/116831829-191a7b80-ab88-11eb-82a8-65d4b3a51555.png)
-![patient_appt_times](https://user-images.githubusercontent.com/39662044/116831831-191a7b80-ab88-11eb-9c11-af02710b8f97.png)
+
+Patients can view follow up notes from their doctor
 ![patient_followup_details](https://user-images.githubusercontent.com/39662044/116831833-19b31200-ab88-11eb-9a38-78bbd87c551d.png)
-![patient_home](https://user-images.githubusercontent.com/39662044/116831834-19b31200-ab88-11eb-80a4-4206e7f9d9f7.png)
+Patients can view and request prescription renewals
 ![patient_prescriptions](https://user-images.githubusercontent.com/39662044/116831835-19b31200-ab88-11eb-84c9-d9d10311e7de.png)
-![patient_schedule_appt](https://user-images.githubusercontent.com/39662044/116831836-19b31200-ab88-11eb-9ef2-5e88a378ccd9.png)
+![login](https://user-images.githubusercontent.com/39662044/116831826-1881e500-ab88-11eb-8c01-1572a14e8dda.png)
+
 

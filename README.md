@@ -12,7 +12,11 @@ We are a group of university students from Dalhousie University, Western Univers
 
 ## Table of Contents
 
-1. [Local Deployment](#local_deployment)
+1. [Steps for Local Deployment](#local_deployment)
+2. [Inspiration](#inspiration)
+3. [What it Does](#purpose)
+4. [Built With](#built_with)
+5. [Screenshots](#screenshots)
 
 
 <a name="local_deployment">
@@ -29,6 +33,7 @@ We are a group of university students from Dalhousie University, Western Univers
   - `npm start`
 - The application is now accessible at `http://localhost:3000` 
 
+<a name="inspiration">
  
 ## Inspiration
 
@@ -36,6 +41,7 @@ The COVID-19 pandemic has vastly changed the way we approached our day-to-day ta
 
 Dr. Screen was built as a supplementary tool to streamline family practitioners' jobs. Its goal is to reduce the amount of time that a practitioner would need to spend with patients for less serious inquiries such as diagnosis of patient conditions as well as prescription renewals. By streamlining simpler inquiries that require visits to the doctor, a doctor is able to help a greater number of patients throughout a day.
 
+<a name="purpose">
 
 ## What it does
 
@@ -47,12 +53,15 @@ The other big feature of our app is the ability of a patient to request prescrip
 
 Lastly, our app allows the doctors to schedule follow-ups with their patients to keep up to date on their condition. These follow-ups can be recurring or a one-time thing after the patient and doctor's appointments to allow the doctor to get a sense of the patient's progress. The doctor can also request the patient to upload pictures to the app to get visuals of the patient's condition if this is something that is required with the patient’s condition. If the doctor sees that the patient is not improving, the doctor can notify the patient to meet with him again.
 
+<a name="built_with">
 
 ## How we built it
 
 We built Dr. Screen using React, Express, Node.js, and Firebase. We chose to use Firebase for our database due to prior experience amongst team members and also for its easy to integrate user authentication mechanism as well as individual functions we could deploy to serve specific purposes such as image uploads to the cloud. Our machine learning model used to predict possible illnesses based on patient symptoms was built using Tensorflow. Furthermore, we used numerous node packages such as React Material UI for specific features found on the application.
 
 For our model we used an MLP neural network trained on a dataset from Kaggle linking symptoms to diseases. We treat it as a multiclass-classification task such that the model outputs probabilities for each disease. Based on a simple selection of the highest probability disease, we were able to achieve 87.4% accuracy on a held out test set.
+
+<a name="screenshots">
 
 ## Screenshots
 

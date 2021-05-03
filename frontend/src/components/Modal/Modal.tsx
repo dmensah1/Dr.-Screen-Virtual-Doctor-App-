@@ -1,15 +1,19 @@
 import React from "react";
 
-export default function Modal() {
+type ModalProps = {
+  label: string
+}
+
+export default function Modal({ label }: ModalProps) {
   const [showModal, setShowModal] = React.useState(false);
   return (
     <>
       <button
-        className="bg-indigo-400 rounded-md w-full text-white active:bg-pink-600 text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+        className="bg-indigo-400 rounded-md w-60 text-white active:bg-pink-600 text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
         type="button"
         onClick={() => setShowModal(true)}
       >
-        Open regular modal
+        {label}
       </button>
       {showModal ? (
         <>

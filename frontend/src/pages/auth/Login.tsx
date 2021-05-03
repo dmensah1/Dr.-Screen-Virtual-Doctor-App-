@@ -8,12 +8,15 @@ import { useUser } from "../../contexts/UserProvider";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { setUserDetails }: UserContextType = useUser();
+  const { userDetails, setUserDetails }: UserContextType = useUser();
 
   const history = useHistory();
 
   const getUser: any = async (userId: string) => {
-    return await axios.get(`${BACKEND_URL}/patients/${userId}`);
+
+    return await axios.get(`${BACKEND_URL}/doctors/${userId}`);
+    // return await axios.get(`${BACKEND_URL}/patients/${userId}`);
+
   };
 
   const signInWithEmailAndPassword = async () => {
@@ -37,6 +40,7 @@ const Login = () => {
       .catch((error) => error.message);
 
     console.log(userID);
+    console.log(token)
 
     if (token) {
       const res: any = await getUser(userID);
@@ -60,9 +64,9 @@ const Login = () => {
 
   return (
     <section className="flex flex-col md:flex-row h-screen items-center">
-      <div className="bg-indigo-600 hidden lg:block w-full md:w-1/2 xl:w-2/3 h-screen">
+      <div className="bg-white flex justify-center content-center object-center hidden lg:block w-full md:w-1/2 xl:w-2/3 h-screen">
         <img
-          src="https://source.unsplash.com/random"
+          src="https://thedo.osteopathic.org/wp-content/uploads/2020/02/patient-doctor-illustration.jpg"
           alt=""
           className="w-full h-full object-cover"
         />
